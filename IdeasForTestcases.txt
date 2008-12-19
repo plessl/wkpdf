@@ -1,0 +1,4 @@
+* load inexistent URL
+* laod inexistent file
+* load a URL with a resource missing (create such a test site)
+* load URL for website with HTTP authentication with correct/wrong credentials

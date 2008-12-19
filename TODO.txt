@@ -1,0 +1,1 @@
+* Extend error reporting function such that a format string and arguments are accepted

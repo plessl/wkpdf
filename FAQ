@@ -1,0 +1,11 @@
+Frequently Asked Questions for wkpdf
+====================================
+
+Q: wkpdf is nice, but can you also use it with Automator?
+A: no, wkpdf is meant as a command line application. But there is an automator
+   action that allows for converting websites to PDF in Automator available 
+   from here:
+   
+    Author: Scott Garner
+    URL: http://www.apple.com/downloads/macosx/automator/downloadurlsaspdfs.html
+

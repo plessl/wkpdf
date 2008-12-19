@@ -1,0 +1,398 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 42;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		4066D7300C1724BD00129622 /* wkpdf.dmg */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 4066D7320C1724C200129622 /* Build configuration list for PBXAggregateTarget "wkpdf.dmg" */;
+			buildPhases = (
+				4066D72F0C1724BD00129622 /* ShellScript */,
+			);
+			dependencies = (
+				4066D7360C1724DC00129622 /* PBXTargetDependency */,
+			);
+			name = wkpdf.dmg;
+			productName = wkpdf.dmg;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		4035FE940C1B2C9A00233256 /* Debugging.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4035FE930C1B2C9A00233256 /* Debugging.h */; };
+		405022240C32FAFB00630196 /* IdeasForTestcases.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 405022230C32FAFA00630196 /* IdeasForTestcases.txt */; };
+		4050223D0C32FE9200630196 /* test_missing.html in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4050223C0C32FE9200630196 /* test_missing.html */; };
+		40508D960BCE341900B8308A /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40508D950BCE341900B8308A /* WebKit.framework */; };
+		4057D6ED0C42CBBB00DA57A3 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4057D6EC0C42CBBB00DA57A3 /* AppKit.framework */; };
+		40945BAE0BD40C780062E4E5 /* CommandlineParser.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 40945BAC0BD40C780062E4E5 /* CommandlineParser.h */; };
+		40945BAF0BD40C780062E4E5 /* CommandlineParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 40945BAD0BD40C780062E4E5 /* CommandlineParser.m */; };
+		40A265320C2C5CC300AAFDA6 /* version.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 40A265310C2C5CC300AAFDA6 /* version.h */; };
+		40B092340C31726E00B8404D /* Helper.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 40B092320C31726E00B8404D /* Helper.h */; };
+		40B092350C31726E00B8404D /* Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 40B092330C31726E00B8404D /* Helper.m */; };
+		40B236190C14971500F15C26 /* LICENSE in CopyFiles */ = {isa = PBXBuildFile; fileRef = 40B236160C14971500F15C26 /* LICENSE */; };
+		40B2361B0C14971500F15C26 /* README in CopyFiles */ = {isa = PBXBuildFile; fileRef = 40B236180C14971500F15C26 /* README */; };
+		40C6E0E60BD10B3100943A27 /* TODO.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 40C6E0E50BD10B3100943A27 /* TODO.txt */; };
+		40E916380BCF61D40074061C /* Controller.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 40E916360BCF61D40074061C /* Controller.h */; };
+		40E916390BCF61D40074061C /* Controller.m in Sources */ = {isa = PBXBuildFile; fileRef = 40E916370BCF61D40074061C /* Controller.m */; };
+		40F22A9B0BCED72C00B64AF8 /* test_print.css in CopyFiles */ = {isa = PBXBuildFile; fileRef = 40F22A980BCED72C00B64AF8 /* test_print.css */; };
+		40F22A9C0BCED72C00B64AF8 /* test_screen.css in CopyFiles */ = {isa = PBXBuildFile; fileRef = 40F22A990BCED72C00B64AF8 /* test_screen.css */; };
+		40F22A9D0BCED72C00B64AF8 /* test.html in CopyFiles */ = {isa = PBXBuildFile; fileRef = 40F22A9A0BCED72C00B64AF8 /* test.html */; };
+		40F9D9EB0C30529700D91C26 /* CONTRIBUTORS in CopyFiles */ = {isa = PBXBuildFile; fileRef = 40F9D9EA0C30529600D91C26 /* CONTRIBUTORS */; };
+		8DD76F9A0486AA7600D96B5E /* wkpdf.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FB7796FE84155DC02AAC07 /* wkpdf.m */; settings = {ATTRIBUTES = (); }; };
+		8DD76F9C0486AA7600D96B5E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08FB779EFE84155DC02AAC07 /* Foundation.framework */; };
+		8DD76F9F0486AA7600D96B5E /* wkpdf.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6859EA3029092ED04C91782 /* wkpdf.1 */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4066D7350C1724DC00129622 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DD76F960486AA7600D96B5E;
+			remoteInfo = wkpdf;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		8DD76F9E0486AA7600D96B5E /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 12;
+			dstPath = "";
+			dstSubfolderSpec = 16;
+			files = (
+				8DD76F9F0486AA7600D96B5E /* wkpdf.1 in CopyFiles */,
+				40F22A9B0BCED72C00B64AF8 /* test_print.css in CopyFiles */,
+				40F22A9C0BCED72C00B64AF8 /* test_screen.css in CopyFiles */,
+				40F22A9D0BCED72C00B64AF8 /* test.html in CopyFiles */,
+				40E916380BCF61D40074061C /* Controller.h in CopyFiles */,
+				40C6E0E60BD10B3100943A27 /* TODO.txt in CopyFiles */,
+				40945BAE0BD40C780062E4E5 /* CommandlineParser.h in CopyFiles */,
+				40B236190C14971500F15C26 /* LICENSE in CopyFiles */,
+				40B2361B0C14971500F15C26 /* README in CopyFiles */,
+				4035FE940C1B2C9A00233256 /* Debugging.h in CopyFiles */,
+				40A265320C2C5CC300AAFDA6 /* version.h in CopyFiles */,
+				40F9D9EB0C30529700D91C26 /* CONTRIBUTORS in CopyFiles */,
+				40B092340C31726E00B8404D /* Helper.h in CopyFiles */,
+				405022240C32FAFB00630196 /* IdeasForTestcases.txt in CopyFiles */,
+				4050223D0C32FE9200630196 /* test_missing.html in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		08FB7796FE84155DC02AAC07 /* wkpdf.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = wkpdf.m; sourceTree = "<group>"; };
+		08FB779EFE84155DC02AAC07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		4035FE930C1B2C9A00233256 /* Debugging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Debugging.h; sourceTree = "<group>"; };
+		404605770BE7870600E0F226 /* wkpdf */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = wkpdf; sourceTree = BUILT_PRODUCTS_DIR; };
+		405022230C32FAFA00630196 /* IdeasForTestcases.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = IdeasForTestcases.txt; sourceTree = "<group>"; };
+		4050223C0C32FE9200630196 /* test_missing.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = test_missing.html; sourceTree = "<group>"; };
+		40508D950BCE341900B8308A /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = /System/Library/Frameworks/WebKit.framework; sourceTree = "<absolute>"; };
+		4057D6EC0C42CBBB00DA57A3 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
+		40945BAC0BD40C780062E4E5 /* CommandlineParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommandlineParser.h; sourceTree = "<group>"; };
+		40945BAD0BD40C780062E4E5 /* CommandlineParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommandlineParser.m; sourceTree = "<group>"; };
+		40A265310C2C5CC300AAFDA6 /* version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = version.h; sourceTree = "<group>"; };
+		40B092320C31726E00B8404D /* Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Helper.h; sourceTree = "<group>"; };
+		40B092330C31726E00B8404D /* Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Helper.m; sourceTree = "<group>"; };
+		40B236160C14971500F15C26 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		40B236170C14971500F15C26 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		40B236180C14971500F15C26 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
+		40BA5C7E0D030D9900BB72DF /* FAQ */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FAQ; sourceTree = "<group>"; };
+		40C6E0E50BD10B3100943A27 /* TODO.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TODO.txt; sourceTree = "<group>"; };
+		40E916360BCF61D40074061C /* Controller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Controller.h; sourceTree = "<group>"; };
+		40E916370BCF61D40074061C /* Controller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Controller.m; sourceTree = "<group>"; };
+		40F22A980BCED72C00B64AF8 /* test_print.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test_print.css; sourceTree = "<group>"; };
+		40F22A990BCED72C00B64AF8 /* test_screen.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test_screen.css; sourceTree = "<group>"; };
+		40F22A9A0BCED72C00B64AF8 /* test.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = test.html; sourceTree = "<group>"; };
+		40F9D9EA0C30529600D91C26 /* CONTRIBUTORS */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CONTRIBUTORS; sourceTree = "<group>"; };
+		C6859EA3029092ED04C91782 /* wkpdf.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = wkpdf.1; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8DD76F9B0486AA7600D96B5E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8DD76F9C0486AA7600D96B5E /* Foundation.framework in Frameworks */,
+				40508D960BCE341900B8308A /* WebKit.framework in Frameworks */,
+				4057D6ED0C42CBBB00DA57A3 /* AppKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		08FB7794FE84155DC02AAC07 /* wcprint */ = {
+			isa = PBXGroup;
+			children = (
+				08FB7795FE84155DC02AAC07 /* Source */,
+				C6859EA2029092E104C91782 /* Documentation */,
+				08FB779DFE84155DC02AAC07 /* External Frameworks and Libraries */,
+				40F22A8B0BCED6FF00B64AF8 /* Resources */,
+				1AB674ADFE9D54B511CA2CBB /* Products */,
+			);
+			name = wcprint;
+			sourceTree = "<group>";
+		};
+		08FB7795FE84155DC02AAC07 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				40B092320C31726E00B8404D /* Helper.h */,
+				40B092330C31726E00B8404D /* Helper.m */,
+				40945BAC0BD40C780062E4E5 /* CommandlineParser.h */,
+				40945BAD0BD40C780062E4E5 /* CommandlineParser.m */,
+				40E916360BCF61D40074061C /* Controller.h */,
+				40E916370BCF61D40074061C /* Controller.m */,
+				08FB7796FE84155DC02AAC07 /* wkpdf.m */,
+				4035FE930C1B2C9A00233256 /* Debugging.h */,
+				40A265310C2C5CC300AAFDA6 /* version.h */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		08FB779DFE84155DC02AAC07 /* External Frameworks and Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				4057D6EC0C42CBBB00DA57A3 /* AppKit.framework */,
+				40508D950BCE341900B8308A /* WebKit.framework */,
+				08FB779EFE84155DC02AAC07 /* Foundation.framework */,
+			);
+			name = "External Frameworks and Libraries";
+			sourceTree = "<group>";
+		};
+		1AB674ADFE9D54B511CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				404605770BE7870600E0F226 /* wkpdf */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		40F22A8B0BCED6FF00B64AF8 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				40B236170C14971500F15C26 /* Makefile */,
+				40F22A980BCED72C00B64AF8 /* test_print.css */,
+				40F22A990BCED72C00B64AF8 /* test_screen.css */,
+				40F22A9A0BCED72C00B64AF8 /* test.html */,
+				4050223C0C32FE9200630196 /* test_missing.html */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		C6859EA2029092E104C91782 /* Documentation */ = {
+			isa = PBXGroup;
+			children = (
+				40BA5C7E0D030D9900BB72DF /* FAQ */,
+				C6859EA3029092ED04C91782 /* wkpdf.1 */,
+				40C6E0E50BD10B3100943A27 /* TODO.txt */,
+				40B236180C14971500F15C26 /* README */,
+				40B236160C14971500F15C26 /* LICENSE */,
+				40F9D9EA0C30529600D91C26 /* CONTRIBUTORS */,
+				405022230C32FAFA00630196 /* IdeasForTestcases.txt */,
+			);
+			name = Documentation;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8DD76F960486AA7600D96B5E /* wkpdf */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1DEB927408733DD40010E9CD /* Build configuration list for PBXNativeTarget "wkpdf" */;
+			buildPhases = (
+				8DD76F990486AA7600D96B5E /* Sources */,
+				8DD76F9B0486AA7600D96B5E /* Frameworks */,
+				8DD76F9E0486AA7600D96B5E /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = wkpdf;
+			productInstallPath = "$(HOME)/bin";
+			productName = wcprint;
+			productReference = 404605770BE7870600E0F226 /* wkpdf */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		08FB7793FE84155DC02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 1DEB927808733DD40010E9CD /* Build configuration list for PBXProject "wkpdf" */;
+			compatibilityVersion = "Xcode 2.4";
+			hasScannedForEncodings = 1;
+			mainGroup = 08FB7794FE84155DC02AAC07 /* wcprint */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8DD76F960486AA7600D96B5E /* wkpdf */,
+				4066D7300C1724BD00129622 /* wkpdf.dmg */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		4066D72F0C1724BD00129622 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/wkpdf",
+			);
+			outputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/wkpdf.dmg",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -ex\n\n[ \"$ACTION\" = build ] || exit 0\n[ \"$BUILD_VARIANTS\" = \"normal\" ] || exit 0\n\ndir=\"$TEMP_FILES_DIR/wkpdf_diskimage\"\ndmg=\"$BUILT_PRODUCTS_DIR/$PROJECT_NAME.dmg\"\n\nrm -rf \"$dir\"\nmkdir \"$dir\"\ncp -R \"$BUILT_PRODUCTS_DIR/wkpdf\" \"$dir\"\ncp -R \"$BUILT_PRODUCTS_DIR/README\" \"$dir\"\ncp -R \"$BUILT_PRODUCTS_DIR/LICENSE\" \"$dir\"\ncp -R \"$BUILT_PRODUCTS_DIR/CONTRIBUTORS\" \"$dir\"\n\nrm -f \"$dmg\"\nhdiutil create -srcfolder \"$dir\" -volname \"$PROJECT_NAME\" \"$dmg\"\nhdiutil internet-enable -yes \"$dmg\"\nrm -rf \"$dir\"";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8DD76F990486AA7600D96B5E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8DD76F9A0486AA7600D96B5E /* wkpdf.m in Sources */,
+				40E916390BCF61D40074061C /* Controller.m in Sources */,
+				40945BAF0BD40C780062E4E5 /* CommandlineParser.m in Sources */,
+				40B092350C31726E00B8404D /* Helper.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4066D7360C1724DC00129622 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8DD76F960486AA7600D96B5E /* wkpdf */;
+			targetProxy = 4066D7350C1724DC00129622 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		1DEB927508733DD40010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G4;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(inherited)";
+				INSTALL_PATH = "$(HOME)/bin";
+				PRODUCT_NAME = wkpdf;
+				ZERO_LINK = YES;
+			};
+			name = Debug;
+		};
+		1DEB927608733DD40010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = (
+					ppc,
+					i386,
+				);
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = G4;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(inherited)";
+				INSTALL_PATH = "$(HOME)/bin";
+				PRODUCT_NAME = wkpdf;
+			};
+			name = Release;
+		};
+		1DEB927908733DD40010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = (
+					ppc,
+					i386,
+				);
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+			};
+			name = Debug;
+		};
+		1DEB927A08733DD40010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = (
+					ppc,
+					i386,
+				);
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+			};
+			name = Release;
+		};
+		4066D7330C1724C200129622 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				PRODUCT_NAME = wkpdf.dmg;
+			};
+			name = Debug;
+		};
+		4066D7340C1724C200129622 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				PRODUCT_NAME = wkpdf.dmg;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1DEB927408733DD40010E9CD /* Build configuration list for PBXNativeTarget "wkpdf" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB927508733DD40010E9CD /* Debug */,
+				1DEB927608733DD40010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1DEB927808733DD40010E9CD /* Build configuration list for PBXProject "wkpdf" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB927908733DD40010E9CD /* Debug */,
+				1DEB927A08733DD40010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4066D7320C1724C200129622 /* Build configuration list for PBXAggregateTarget "wkpdf.dmg" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4066D7330C1724C200129622 /* Debug */,
+				4066D7340C1724C200129622 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 08FB7793FE84155DC02AAC07 /* Project object */;
+}
