@@ -62,7 +62,7 @@
 	return;
   }
   [_saveTimer invalidate];
-  _saveTimer = [NSTimer scheduledTimerWithTimeInterval:saveDelay target:self selector:@selector(makePDF) userInfo:NULL repeats:NO];
+  _saveTimer = [NSTimer scheduledTimerWithTimeInterval:saveDelay target:self selector:@selector(makePDF:) userInfo:_saveTimer repeats:NO];
 }
 
 - (void)makePDF:(NSTimer *)theTimer {
