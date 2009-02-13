@@ -58,14 +58,12 @@ class Controller < NSObject
 
     def makePDF(timer)
       log("webView #{webView} makePDF\n")
-      
-      #CommandlineParser * options = [CommandlineParser sharedInstance];
-      #
-      #if ([options paginate])
-      #  [self makePaginatedPDF];
-      #else
-      #  [self makeSinglePagePDF];
-      makePaginatedPDF
+      p = CommandlineParser.instance
+      if p.paginate then
+        makePaginatedPDF
+      else
+        makeSinglePagePDF
+      end
     end
 
     def makePaginatedPDF
@@ -88,16 +86,12 @@ class Controller < NSObject
       printInfo.setOrientation(p.paperOrientation)
       printInfo.setPaperSize(p.paperSize)
 
-
-#      double margin = [[options margin] doubleValue];
-#      if (!isnan(margin)) {
-#        [printInfo setBottomMargin:margin];
-#        [printInfo setTopMargin:margin];
-#        [printInfo setLeftMargin:margin];
-#        [printInfo setRightMargin:margin];
-#      }
-#      //LOG_DEBUG(@"printInfo: %@",printInfo);
-
+      if p.margin > 0 then
+        printInfo.setBottomMargin(p.margin)
+        printInfo.setTopMargin(p.margin)
+        printInfo.setLeftMargin(p.margin)
+        printInfo.setRightMargin(p.margin)
+      end
 
       viewToPrint = webView.mainFrame.frameView.documentView
       printOp = NSPrintOperation.printOperationWithView_printInfo(viewToPrint,printInfo)
@@ -108,28 +102,28 @@ class Controller < NSObject
       NSApplication.sharedApplication.terminate(nil)
   end
 
+  def makeSinglePagePDF
+    log("Make single-page PDF...\n")
+    p = CommandlineParser.instance
+    viewToPrint = webView.mainFrame.frameView.documentView
+    r = viewToPrint.bounds
+    if p.margin > 0 then
+      r.origin.x -= p.margin;
+      r.origin.y -= p.margin;
+      r.size.width += 2 * p.margin;
+      r.size.height += 2 * p.margin;
+    end
 
-#    - (void)makeSinglePagePDF {
-#      LOG_DEBUG(@"Make single-page PDF...");
-#      CommandlineParser * options = [CommandlineParser sharedInstance];
-#      NSView *viewToPrint = [[[_webView mainFrame] frameView] documentView];
-#      NSRect r = [viewToPrint bounds];
-#      double margin = [[options margin] doubleValue];
-#      if (!isnan(margin)) {
-#        r.origin.x -= margin;
-#        r.origin.y -= margin;
-#        r.size.width += 2 * margin;
-#        r.size.height += 2 * margin;
-#      }
-#      LOG_DEBUG(@"Creates PDF");
-#      NSData *data = [viewToPrint dataWithPDFInsideRect:r];
-#      LOG_DEBUG(@"Saves PDF");
-#      [data writeToFile:[options output] atomically:YES];
-#      LOG_DEBUG(@"Terminate application");
-#      exit(0);
-#    }
+    log("Create PDF\n")
+    data = viewToPrint.dataWithPDFInsideRect(r)
+    log("Save PDF\n")
+    data.writeToFile_atomically(p.output,true)
+    log("Terminate application\n")
+    NSApplication.sharedApplication.terminate(nil)
 
-#private
+  end
+
+private
 
   def log(msg)
     $stderr.puts(msg)

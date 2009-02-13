@@ -1,0 +1,5 @@
+Complete Commandline Parsing
+ - source
+ - output
+ - paper format
+ - check if floating point numbers are valid

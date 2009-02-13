@@ -32,7 +32,7 @@ class CommandlineParser
 
     @paperSize = NSPrintInfo.sizeForPaperName('A4')
     @paginate = true
-    @margin = 72  # TODO se this to margin of defaults printer as determined by NSPrintInfo
+    @margin = -1.0
     @stylesheetMedia = ""
     @printBackground = false
     @paperOrientation = NSPortraitOrientation
@@ -187,19 +187,6 @@ __END__
   return size;
 }
 
-- (NSDecimalNumber*)parseDecimalNumber:(char *)arg argName:(NSString *)argName
-{
-  NSString * str = [NSString stringWithUTF8String:arg];
-  NSDecimalNumber * value = [NSDecimalNumber decimalNumberWithString:str];
-  double d = [value doubleValue];
-  LOG_DEBUG(@"%@ = %f\n", argName, d);
-  if (isnan(d)) {
-    NSString * msg = [NSString stringWithFormat:@"Argument '%@' '%@' is not a valid decimal number.", argName, str];
-    fprintf(stderr, "%@\n", msg);
-    [Helper terminateWithErrorcode:1 andMessage:msg];
-  }
-  return value;
-}
 
 - (NSURL *)parseSourcePathOrURL:(char *)arg
 {
