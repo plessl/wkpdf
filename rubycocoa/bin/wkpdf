@@ -1,8 +1,0 @@
-#!/usr/bin/env ruby
-
-wkpdf_rb = File.dirname(__FILE__) + "/../lib/wkpdf.rb"
-
-#puts "wkpdf_rb = #{wkpdf_rb}\n"
-#puts "ARGV = #{ARGV.join(' ')}\n"
-
-system("#{wkpdf_rb} #{ARGV.join(' ')}")
