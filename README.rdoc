@@ -14,6 +14,13 @@ You find the latest information on wkpdf on:
  
 For questions regarding wkpdf contact: wkpdf@plesslweb.ch
 
+== WARNING
+
+I'm currently in the process of porting wkpdf to RubyCocoa. Currently this 
+reimplementation is not fully functional yet. For the moment I suggest to 
+use the Objective-C implementation available from http://wkpdf.plesslweb.ch
+for production use.
+
 
 == Install
 
