@@ -1,0 +1,8 @@
+rake manifest
+
+# test locally
+rake install
+
+# upload to github
+rake build_gemspec
+git push

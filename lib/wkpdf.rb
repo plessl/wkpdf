@@ -28,15 +28,40 @@ parser.parse_commandline
 # required size, if turned on, the view should use the page size. 
 webView = WebView.alloc.initWithFrame_frameName_groupName(NSMakeRect(0,0,1,1), "myFrame", "myGroup");
 
-window = NSWindow.alloc.initWithContentRect_styleMask_backing_defer(NSMakeRect(0,0,1,1),
-                                                NSBorderlessWindowMask, NSBackingStoreNonretained, false)
-window.setContentView(webView)
+
+
+# Disable this code
+#
+#   window = NSWindow.alloc.initWithContentRect_styleMask_backing_defer(
+#           NSMakeRect(0,0,1,1),
+#           NSBorderlessWindowMask,
+#           NSBackingStoreNonretained, false)
+#   window.setContentView(webView)
+#
+#
+# It seems that this workaround is no longer needed. It used to be required to 
+# due to a bug in WebKit that introduced a dependency between Cocoa and the WindowServer.
+# Acutually it should be possible to use Cocoa views without a running Window server.
+#
+# Still, wkpdf causes the warning to be printed at application startup:
+#
+#   _RegisterApplication(), FAILED TO establish the default connection 
+#   to the WindowServer, _CGSDefaultConnection() is NULL
+#
+# and a warning about a NSRecursiveLock error when terminating the application
+#
+#   ruby[3818:613] *** -[NSRecursiveLock unlock]: lock 
+#   (<NSRecursiveLock: 0x6982d0> '(null)') unlocked when not locked
+#   *** Break on _NSLockError() to debug.
+#
+# However, despite of these error messages, wkpdf seems to work just fine, even 
+# without a connection to the WindowServer. This opens the way to a non-interactive
+# use of wkpdf, e.g., on a server.
 
 controller = Controller.alloc.initWithWebView(webView)
 webView.setFrameLoadDelegate(controller)
 
 #OSX::NSApp.run
-
 
 
 pool = NSAutoreleasePool.alloc.init
