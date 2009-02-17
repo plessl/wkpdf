@@ -2,12 +2,20 @@ require 'rubygems'
 require 'rake'
 require 'echoe'
 
-Echoe.new('wkpdf', '0.1.0') do |p|
-  p.description    = "Render HTML to PDF using WebKit."
+require File.join(File.dirname(__FILE__), 'lib', 'version')
+
+WKPDF_VERSION = Wkpdf::VERSION::STRING
+
+Echoe.new('wkpdf', WKPDF_VERSION) do |p|
+  p.summary        = "Render HTML to PDF using WebKit."
+  p.description    = "wkpdf renders HTML to PDF using WebKit on Mac OS X. wkpdf is "
+  p.description    += "implemented in RubyCocoa."
+  p.version        = WKPDF_VERSION
+  p.platform       = "darwin-*-*"
   p.url            = "http://github.com/plessl/wkpdf"
   p.author         = "Christian Plessl"
   p.email          = "christian@plesslweb.ch"
-  p.ignore_pattern = ["tmp/*", "test/*", "test/*/*", "assets/*"]
+  p.ignore_pattern = ["tmp/*", "test/*", "test/*/*", "assets/*", "out*"]
 #  p.development_dependencies = []
 end
 

@@ -1,6 +1,9 @@
+$LOAD_PATH << File.dirname(__FILE__)
+
 require 'getoptlong'
 require 'rdoc/usage'
 require 'osx/cocoa'
+require 'version'
 
 class CommandlineParser
 
@@ -75,7 +78,6 @@ class CommandlineParser
       [ '--save-delay',           GetoptLong::REQUIRED_ARGUMENT]
     )
 
-  puts "parsing options\n"
   
   opts.each do |opt, arg|
     case opt
@@ -105,7 +107,7 @@ class CommandlineParser
       when '--timeout'
         @@timeout = Float(arg)
       when '--version'
-        puts "--version: not implemented\n" # TODO
+        puts "#{Wkpdf::VERSION::STRING}\n"
         NSApplication.sharedApplication.terminate(nil)
       when '--margin'
         @@margin = Float(arg)

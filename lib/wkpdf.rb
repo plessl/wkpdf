@@ -30,7 +30,7 @@ webView = WebView.alloc.initWithFrame_frameName_groupName(NSMakeRect(0,0,1,1), "
 
 
 
-# Disable this code
+# Disabled this code
 #
 #   window = NSWindow.alloc.initWithContentRect_styleMask_backing_defer(
 #           NSMakeRect(0,0,1,1),
