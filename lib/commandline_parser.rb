@@ -81,10 +81,10 @@ class CommandlineParser
   
   opts.each do |opt, arg|
     case opt
-      when '--source'    # TODO integrate functionality from ObjC implementation
-        @source = arg
-      when '--output'    # TODO integrate functionality from ObjC implementation
-        @output = arg
+      when '--source'
+        @source = parseSourcePathOrURL(arg)
+      when '--output'
+        @output = parseOutputPath(arg)
       when '--format'
         @paperSize = NSPrintInfo.sizeForPaperName(arg.upcase)
       when '--portrait'
@@ -114,7 +114,7 @@ class CommandlineParser
       when '--stylesheet-media'
         @stylesheetMedia = arg
       when '--print-background'
-        @printBackground = (arg == "yes")
+        @printBackground = true if (arg == "yes")
       when '--ignore-http-errors'
         @ignoreHttpErrors = (arg == "yes")
       when '--username'
@@ -172,7 +172,33 @@ For further information refer to http://wkpdf.plesslweb.ch
   
   end
   
-  
+  def parseSourcePathOrURL(arg)
+    argAsString = NSString.stringWithUTF8String(arg)
+    path = argAsString.stringByExpandingTildeInPath
+    fm = NSFileManager.defaultManager
+    if fm.fileExistsAtPath(path) then
+      url = NSURL.fileURLWithPath(path)
+    else
+      url = NSURL.URLWithString(argAsString)
+    end
+
+    # check URL validity
+    supportedSchemes = NSArray.arrayWithObjects("http", "https", "ftp", "file", nil)
+    scheme = url.scheme
+    if scheme.nil? || (supportedSchemes.indexOfObject(scheme.lowercaseString) == NSNotFound) then
+      puts "#{argAsString} is neither a filename nor an URL with a supported scheme (http,https,ftp,file)\n"
+       NSApplication.sharedApplication.terminate(nil)
+    end
+
+    return url.absoluteString
+  end
+
+  def parseOutputPath(arg)
+    argAsString = NSString.stringWithUTF8String(arg)
+    return argAsString.stringByExpandingTildeInPath
+  end
+
+
 end
 
 
@@ -190,36 +216,4 @@ __END__
 }
 
 
-- (NSURL *)parseSourcePathOrURL:(char *)arg
-{
-  NSURL * url;
-  NSString * argAsString = [NSString stringWithUTF8String:arg]; 
-  NSString * path = [ argAsString stringByExpandingTildeInPath];
-  NSFileManager * fm = [NSFileManager defaultManager];
-  BOOL argIsFile = [fm fileExistsAtPath:path];
-  if (argIsFile){
-    url = [NSURL fileURLWithPath:path];
-  } else {
-    url = [NSURL URLWithString:argAsString];
 
-    // check URL validity
-    NSArray * supportedSchemes = [NSArray arrayWithObjects:@"http", @"https", @"ftp", @"file", nil];
-    NSString *scheme = [url scheme];
-    LOG_DEBUG(@"--source URL scheme=%@\n",scheme);
-    if ((scheme == nil) || 
-        ([supportedSchemes indexOfObject:[scheme lowercaseString]] == NSNotFound)){
-      NSString * errorMsg = [NSString stringWithFormat:
-        @"%@ is neither a filename nor an URL with a supported scheme (http,https,ftp,file)",
-        argAsString];
-      [Helper terminateWithErrorcode:1 andMessage:errorMsg];
-    }
-  }
-  return url;
-}
-
-- (NSString *)parseOutputPath:(char *)arg;
-{
-  NSString * argAsString = [NSString stringWithUTF8String:arg]; 
-  NSString * path = [ argAsString stringByExpandingTildeInPath];
-  return path;
-}

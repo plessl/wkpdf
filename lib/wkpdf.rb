@@ -78,7 +78,7 @@ webView.setPreferences(webPrefs)
 webView.setMaintainsBackForwardList(false)
 
 if parser.stylesheetMedia != "" then
-  webView.setMediaStyle(parser.styleSheetMedia)
+  webView.setMediaStyle(parser.stylesheetMedia)
 end
 
 #OSX::NSApp.run

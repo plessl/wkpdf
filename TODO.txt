@@ -1,12 +1,8 @@
 Complete Commandline Parsing
- - source
  - output
  - paper format
  - check if floating point numbers are valid
+ - fix margins when saving as paginated PDF
 
 Implement error handling in Controller
  - Detect errors when loading resources
-
-Translate wkpdf to a RubyGem
- - use Choctop?
- - configure github to build the gem
