@@ -6,6 +6,7 @@ require 'osx/cocoa'
 include OSX
 require 'controller'
 require 'commandline_parser'
+require 'version'
 
 OSX::require_framework('/System/Library/Frameworks/WebKit.framework')
 
@@ -58,8 +59,27 @@ webView = WebView.alloc.initWithFrame_frameName_groupName(NSMakeRect(0,0,1,1), "
 # without a connection to the WindowServer. This opens the way to a non-interactive
 # use of wkpdf, e.g., on a server.
 
+
+webPrefs = WebPreferences.standardPreferences
+webPrefs.setLoadsImagesAutomatically(true)
+webPrefs.setAllowsAnimatedImages(true)
+webPrefs.setAllowsAnimatedImageLooping(false)
+webPrefs.setJavaEnabled(false)
+webPrefs.setPlugInsEnabled(parser.enablePlugins)
+webPrefs.setJavaScriptEnabled(true)
+webPrefs.setJavaScriptCanOpenWindowsAutomatically(false)
+webPrefs.setShouldPrintBackgrounds(parser.printBackground)
+
 controller = Controller.alloc.initWithWebView(webView)
 webView.setFrameLoadDelegate(controller)
+webView.setResourceLoadDelegate(controller)
+webView.setApplicationNameForUserAgent("wkpdf/" + Wkpdf::VERSION::STRING)
+webView.setPreferences(webPrefs)
+webView.setMaintainsBackForwardList(false)
+
+if parser.stylesheetMedia != "" then
+  webView.setMediaStyle(parser.styleSheetMedia)
+end
 
 #OSX::NSApp.run
 
@@ -68,14 +88,14 @@ pool = NSAutoreleasePool.alloc.init
 
 puts "wkpdf started\n"
 
-
 theURL = NSURL.URLWithString(parser.source)
+request = NSURLRequest.requestWithURL_cachePolicy_timeoutInterval(
+  theURL, parser.cachingPolicy, parser.timeout) 
 
-request = NSURLRequest.requestWithURL_cachePolicy_timeoutInterval(theURL,NSURLRequestReloadIgnoringCacheData,200.0) 
+# TODO: detect timeout and terminate if timeout occured
+
 webView.mainFrame.loadRequest(request)
-
 NSRunLoop.currentRunLoop.run
-
 webView.release
 
 pool.release
@@ -84,54 +104,7 @@ exit 0
 
 __END__
 
-CommandlineParser * parser = [CommandlineParser sharedInstance];
-[parser parseWithArgumentNumber:argc andCommandline:argv];
-[parser prettyprint];
-
-[NSApplication sharedApplication];
-
-// use 1x1 size: when pagination is turned off, the view should grow to the 
-// required size, if turned on, the view should use the page size. 
-WebView * webView = [[WebView alloc] initWithFrame:NSMakeRect(0,0,1,1)
-                                         frameName:@"myFrame"
-                                         groupName:@"myGroup"];
-
-NSWindow * window = [[NSWindow alloc] initWithContentRect:NSMakeRect(0,0,1,1) 
-                                                styleMask:NSBorderlessWindowMask 
-                                                  backing:NSBackingStoreNonretained defer:NO];
-[window setContentView:webView];
-
-Controller * controller = [[Controller alloc] initWithWebView:webView]; 
-
-[webView setFrameLoadDelegate: controller];
-[webView setResourceLoadDelegate: controller];
-NSString *appName = [NSString stringWithFormat: @"wkpdf/%@", [parser getVersionString]];
-[webView setApplicationNameForUserAgent:appName];
-
-WebPreferences * webPrefs = [WebPreferences standardPreferences];
-[webPrefs setLoadsImagesAutomatically:YES];
-[webPrefs setAllowsAnimatedImages:YES];
-[webPrefs setAllowsAnimatedImageLooping:NO];
-[webPrefs setJavaEnabled:NO];
-[webPrefs setPlugInsEnabled:[parser enablePlugins]];
-[webPrefs setJavaScriptEnabled:YES];
-[webPrefs setJavaScriptCanOpenWindowsAutomatically:NO];
-[webPrefs setShouldPrintBackgrounds:[parser printBackground]];
-[webView setPreferences:webPrefs];
-[webView setMaintainsBackForwardList:NO];
-
-if ([parser stylesheetMedia] != nil)
-[webView setMediaStyle:[parser stylesheetMedia]];
-LOG_DEBUG(@"media style is: %@", [webView mediaStyle]);
-
 NSURL * theURL = [parser source];  
 NSURLRequest * request = [NSURLRequest requestWithURL:theURL 
                                           cachePolicy: [parser cachingPolicy]
                                       timeoutInterval: [parser timeout]];
-
-// TODO: detect timeout and terminate if timeout occured
-
-[[webView mainFrame] loadRequest:request];
-[[NSRunLoop currentRunLoop] run];
-  
-[webView release];

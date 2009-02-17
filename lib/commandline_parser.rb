@@ -90,9 +90,9 @@ class CommandlineParser
       when '--portrait'
         @paperOrientation = NSPortraitOrientation
       when '--landscape'
-        @@paperOrientation = NSLandscapeOrientation
+        @paperOrientation = NSLandscapeOrientation
       when '--hcenter'
-        @@horizontallyCentered = true
+        @horizontallyCentered = true
       when '--vcenter'
         
       when '--help', '-h'
@@ -100,33 +100,33 @@ class CommandlineParser
         NSApplication.sharedApplication.terminate(nil)
       when '--caching'
         if (arg == "no") then
-          @@cachingPolicy = NSURLRequestUseProtocolCachePolicy
+          @cachingPolicy = NSURLRequestUseProtocolCachePolicy
         else
-          @@cachingPolicy = NSURLRequestUseProtocolCachePolicy
+          @cachingPolicy = NSURLRequestUseProtocolCachePolicy
         end
       when '--timeout'
-        @@timeout = Float(arg)
+        @timeout = Float(arg)
       when '--version'
         puts "#{Wkpdf::VERSION::STRING}\n"
         NSApplication.sharedApplication.terminate(nil)
       when '--margin'
-        @@margin = Float(arg)
+        @margin = Float(arg)
       when '--stylesheet-media'
-        @@stylesheetMedia = arg
+        @stylesheetMedia = arg
       when '--print-background'
-        @@printBackground = (arg == "yes")
+        @printBackground = (arg == "yes")
       when '--ignore-http-errors'
-        @@ignoreHttpErrors = (arg == "yes")
+        @ignoreHttpErrors = (arg == "yes")
       when '--username'
-        @@username = arg
+        @username = arg
       when '--password'
-        @@password = arg
+        @password = arg
       when '--paginate'
-        @@paginate = (arg == "yes")
+        @paginate = (arg == "yes")
       when '--enable-plugins'
-        @@enablePlugins = (arg == "yes")
+        @enablePlugins = (arg == "yes")
       when '--save-delay'
-        @@saveDelay = Float(arg)
+        @saveDelay = Float(arg)
     end
 
    end
