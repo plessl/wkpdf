@@ -86,7 +86,7 @@ class CommandlineParser
       when '--output'
         @output = parseOutputPath(arg)
       when '--format'
-        @paperSize = NSPrintInfo.sizeForPaperName(arg.upcase)
+        @paperSize = parsePaperSize(arg)
       when '--portrait'
         @paperOrientation = NSPortraitOrientation
       when '--landscape'
@@ -195,25 +195,18 @@ For further information refer to http://wkpdf.plesslweb.ch
 
   def parseOutputPath(arg)
     argAsString = NSString.stringWithUTF8String(arg)
-    return argAsString.stringByExpandingTildeInPath
+    path = argAsString.stringByExpandingTildeInPath
+    return path
   end
 
+  def parsePaperSize(arg)
+    paperName = NSString.stringWithUTF8String(arg)
+    size = NSPrintInfo.sizeForPaperName(paperName)
+    if ((size.width == 0.0) || (size.height == 0.0)) then
+      puts "#{paperName} is not a valid paper format\n"
+      NSApplication.sharedApplication.terminate(nil)
+    end
+    return size
+  end
 
 end
-
-
-__END__
-
-- (NSSize)parsePaperSize:(char *)arg
-{
-  NSString * paperName = [NSString stringWithUTF8String:arg];
-  NSSize size = [NSPrintInfo sizeForPaperName:paperName];
-  if ((size.width == 0.0) && (size.height == 0.0)){
-    fprintf(stderr,"%s is not a valid paper format!\n",arg);
-    [Helper terminateWithErrorcode:1 andMessage:@"invalid paper format"];
-  }
-  return size;
-}
-
-
-

@@ -47,13 +47,47 @@ class Controller < NSObject
     # indicates errors for a partially loaded page
     def webView_didFailLoadWithError_forFrame(sender,error,frame)
       log("webView #{sender} didFailLoadWithError: #{error.localizedDescription}, Frame: #{frame}\n")
-      #[Helper terminateWithErrorcode:1 andMessage:[error localizedDescription]];
+      NSApplication.sharedApplication.terminate(nil)
     end
 
     # indicates errors for initially loading a page
     def webView_didFailProvisionalLoadWithError_forFrame(sender,error,frame)
       log("webView #{sender} didFailProvisionalLoadWithError \"#{error.localizedDescription}\", Frame: #{frame}")
-      #[Helper terminateWithErrorcode:1 andMessage:[error localizedDescription]];
+      NSApplication.sharedApplication.terminate(nil)
+    end
+
+    # accessing a password protected resource
+    def webView_resource_identifier_didReceiveAuthenticationChallenge_fromDataSource(sender,identifier,challenge,dataSource)
+      log("webView #{sender} didReceiveAuthenticationChallenge challenge: #{challenge} from data source: #{dataSource}")
+
+      if challenge.previousFailureCount == 0 then
+        p = CommandlineParser.instance
+        credential = NSURLCredential.credentialWithUser_password_persistence(p.username,p.password,NSURLCredentialPersistenceForSession)
+        challenge.sender.useCredential_forAuthenticationChallenge(sender,challenge)
+      else
+        puts "Could not authenticate with the given username/password\n"
+        NSApplication.sharedApplication.terminate(nil)
+      end
+    end
+
+    # notification that a resource is unavailable
+    def webView_resource_didFailLoadingWithError_fromDataSource(sender,identifier,error,dataSource)
+      log("didFailLoadingWithError identifier: #{identifier} error: #{error.localizedDescription} dataSource: #{dataSource}\n")
+      p = CommandlineParser.instance
+      if p.ignoreHttpErrors then
+        puts "Could not load resource #{identifier}, error: #{error.localizedDescription}\n"
+        NSApplication.sharedApplication.terminate(nil)
+      end
+    end
+
+    # plugin failed to load
+    def webView_plugInFailedWithError_dataSource(sender,error,dataSource)
+      puts "plugInFailedWithError error: #{error.localizedDescription} dataSource: #{dataSource}\n"
+      p = CommandlineParser.instance
+      if p.ignoreHttpErrors then
+        puts "Cound not load plugin, error: #{error.localizedDescription}\n"
+        NSApplication.sharedApplication.terminate(nil)
+      end
     end
 
     def makePDF(timer)
@@ -123,6 +157,14 @@ class Controller < NSObject
 
   end
 
+  # log all respondsToSelector calls. This helps to spot possibly interesting 
+  # delegation calls
+  #def respondsToSelector(sel)
+  #  log "checked for SEL: #{sel}\n"
+  #  return super.respondsToSelector(sel)
+  #end
+
+
 private
 
   def log(msg)
@@ -174,37 +216,6 @@ __END__
   _saveTimer = [NSTimer scheduledTimerWithTimeInterval:saveDelay target:self selector:@selector(makePDF:) userInfo:_saveTimer repeats:NO];
 }
 
-- (void)webView:(WebView *)sender didCommitLoadForFrame:(WebFrame *)frame {
-  LOG_DEBUG(@"webView %@ didCommitLoadForFrame %@", sender, frame);
-}
-
-// indicates errors for a partially loaded page
-- (void)webView:(WebView *)sender didFailLoadWithError:(NSError *)error forFrame:(WebFrame *)frame {
-  LOG_DEBUG(@"webView %@ didFailLoadWithError Error: %@, Frame: %@", sender, error, frame);
-  [Helper terminateWithErrorcode:1 andMessage:[error localizedDescription]];
-}
-
-// indicates errors for for initially loading a page
-- (void)webView:(WebView *)sender didFailProvisionalLoadWithError:(NSError *)error forFrame:(WebFrame *)frame {
-  LOG_DEBUG(@"webView %@ didFailProvisionalLoadWithError Error: %@, Frame: %@", sender, error, frame);
-  [Helper terminateWithErrorcode:1 andMessage:[error localizedDescription]];
-}
-
-// accessing a password protected resource
-- (void)webView:(WebView *)sender resource:(id)identifier didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge fromDataSource:(WebDataSource *)dataSource {
-  LOG_DEBUG(@"webView %@ didReceiveAuthenticationChallenge challenge: %@ from data source: %@", challenge, dataSource );
-  
-  if ([challenge previousFailureCount] == 0) {
-    CommandlineParser * options = [CommandlineParser sharedInstance];
-    NSURLCredential * credential = [NSURLCredential credentialWithUser:[options username]
-                                                              password:[options password]
-                                                           persistence:NSURLCredentialPersistenceForSession];
-    [[challenge sender] useCredential:credential forAuthenticationChallenge:challenge];
-  } else {
-    [Helper terminateWithErrorcode:1 andMessage:@"could not authenticate with the given username/password"];
-  }
-    
-}
 
 // assign each resource a unique identifier when loading
 - (id)webView:(WebView *)sender identifierForInitialRequest:(NSURLRequest *)request fromDataSource:(WebDataSource *)dataSource {
@@ -219,32 +230,6 @@ __END__
 }
 
 
-// notification that a resource is unavailable
--(void)webView:(WebView *)sender resource:(id)identifier didFailLoadingWithError:(NSError *)error fromDataSource:(WebDataSource *)dataSource {
-  LOG_DEBUG (@"didFailLoadingWithError identifier: %@ error: %@ dataSource: %@", identifier, error, dataSource);
-  CommandlineParser * options = [CommandlineParser sharedInstance];
-  if (![options ignoreHttpErrors]){
-    NSString *errorMsg = [NSString stringWithFormat:@"could not load resource %@, error %@", 
-      identifier, error];
-    [Helper terminateWithErrorcode:1 andMessage:errorMsg];
-  }
-}
 
-- (void)webView:(WebView *)sender plugInFailedWithError:(NSError *)error dataSource:(WebDataSource *)dataSource {
-  LOG_DEBUG (@"plugInFailedWithError error: %@ dataSource: %@", error, dataSource);
-  CommandlineParser * options = [CommandlineParser sharedInstance];
-  if (![options ignoreHttpErrors]){
-    NSString *errorMsg = [NSString stringWithFormat:@"could not load plugin, error %@", error];
-    [Helper terminateWithErrorcode:1 andMessage:errorMsg];
-  }
-}
-
-// log all respondsToSelector calls. This helps to spot possibly interesting 
-// delegation calls
-- (BOOL) respondsToSelector: (SEL) aSelector
-{
-  LOG_DEBUG (@"checked for SEL: %s", (char *) aSelector);
-  return ([super respondsToSelector: aSelector]);
-}
 
 @end
