@@ -100,11 +100,3 @@ webView.release
 
 pool.release
 exit 0
-
-
-__END__
-
-NSURL * theURL = [parser source];  
-NSURLRequest * request = [NSURLRequest requestWithURL:theURL 
-                                          cachePolicy: [parser cachingPolicy]
-                                      timeoutInterval: [parser timeout]];
