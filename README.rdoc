@@ -24,7 +24,7 @@ for production use.
 
 == Install
 
-  gem install plessl-wkpdf --source http://gems.github.com
+  sudo gem install plessl-wkpdf --source http://gems.github.com
 
 == Usage
 

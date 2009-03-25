@@ -1,6 +1,7 @@
 $LOAD_PATH << File.dirname(__FILE__)
 
 require 'getoptlong'
+require 'optparse'
 require 'rdoc/usage'
 require 'osx/cocoa'
 require 'version'
@@ -50,7 +51,127 @@ class CommandlineParser
     @password = ""
   
   end
-  
+
+  def parse_commandline_optparse(args)
+
+    configure_defaults
+
+    opts = OptionParser.new do |opts|
+      opts.banner = "Usage: wkpdf [options]"
+      opts.separator ""
+
+      opts.separator "Mandatory arguments:"
+
+      opts.on(:REQUIRED, "--source URL|file",
+        "URL or file to be converted to PDF (required argument)") do |arg|
+        @source = parseSourcePathOrURL(arg)
+      end
+
+      opts.on(:REQUIRED, "--output file",
+        "filename for the PDF (required argument)") do |arg|
+        @output = parseOutputPath(arg)
+      end
+
+      opts.separator "Options:"
+
+      opts.on(:REQUIRED, "--format",
+        "select paper format (valid values are e.g. A4, A5, A3, Legal, Letter, Executive) CAUTION: these values are case-sensitive") do |arg|
+        @paperSize = parsePaperSize(arg)
+      end
+
+      opts.on(:NONE, "--portrait",
+        "use portrait paper orientation") do
+         @paperOrientation = NSPortraitOrientation
+      end
+
+      opts.on(:NONE, "--landscape",
+        "use landscape paper orientation") do
+         @paperOrientation = NSLandscapeOrientation
+      end
+
+      opts.on(:NONE, "--hcenter",
+        "center output horizontally") do
+        @horizontallyCentered = true
+      end
+
+      opts.on(:NONE, "--vcenter",
+        "center output vertically") do
+        @verticallyCentered = true
+      end
+
+      opts.on(:REQUIRED, "--caching yes|no",
+        "retrieve website from cache if available (default: yes)") do |arg|
+        if (arg == "no") then
+          @cachingPolicy = NSURLRequestUseProtocolCachePolicy
+        else
+          @cachingPolicy = NSURLRequestUseProtocolCachePolicy
+        end
+      end
+
+      opts.on(:REQUIRED, "--timeout N",
+        "set timeout to N seconds, default: no timeout\n") do |arg|
+        @timeout = Float(arg)
+      end
+
+      opts.on(:REQUIRED, "--margin size",
+        "set paper margin in points (same margin for all margins") do |arg|
+        @margin = Float(arg)
+      end
+
+      opts.on(:REQUIRED, "--stylesheet-media media",
+        "set the CSS media value (default: 'screen')") do |arg|
+        @stylesheetMedia = arg
+      end
+
+      opts.on(:REQUIRED, "--print-background yes|no",
+        "display background images (default: no)") do |arg|
+        @printBackground = true if (arg == "yes")
+      end
+
+      opts.on(:REQUIRED, "--paginate yes|no",
+        "enable pagination of output (default: yes), output page is resized to fit content when paginate=no") do |arg|
+        @paginate = (arg == "yes")
+      end
+
+      opts.on(:REQUIRED, "--ignore-http-errors yes|no",
+        "generate PDF even if server error occur (e.g. server returns 404 Not Found errors.)") do |arg|
+        @ignoreHttpErrors = (arg == "yes")
+      end
+
+      opts.on(:REQUIRED, "--username user",
+        "authenticate with this username user") do |arg|
+        @username = arg
+      end
+
+      opts.on(:REQUIRED, "--password pwd",
+        "authenticate with this username user") do |arg|
+        @password = arg
+      end
+
+      opts.on(:REQUIRED, "--enable-plugins yes|no",
+        "enable plugins (default: no)") do |arg|
+        @enablePlugins = (arg == "yes")
+      end
+
+      opts.on(:REQUIRED, "--save-delay time",
+        "wait for time seconds after page is loaded before generating the PDF") do |arg|
+        @saveDelay = Float(arg)
+      end
+
+      opts.on_tail(:NONE, "-v", "--version", "print version number") do
+        puts "wkpdf version: #{Wkpdf::VERSION::STRING}\n"
+        NSApplication.sharedApplication.terminate(nil)
+      end
+
+      opts.on_tail(:NONE, "-h", "--help", "show help on options") do
+        puts opts
+        NSApplication.sharedApplication.terminate(nil)
+      end
+      
+      opts.parse!(args)
+    end
+  end
+
   def parse_commandline
 
     configure_defaults
