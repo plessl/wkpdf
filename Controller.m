@@ -65,15 +65,34 @@
   _saveTimer = [NSTimer scheduledTimerWithTimeInterval:saveDelay target:self selector:@selector(makePDF:) userInfo:_saveTimer repeats:NO];
 }
 
+
+- (void)makePNG {
+
+  CommandlineParser * options = [CommandlineParser sharedInstance];
+
+  NSView *viewToPrint = [[[_webView mainFrame] frameView] documentView];
+  [_webView lockFocus];
+  NSBitmapImageRep *rep = [[NSBitmapImageRep alloc] initWithFocusedViewRect:[viewToPrint bounds]];
+  [_webView unlockFocus];
+  NSData *imageData = [rep representationUsingType:NSPNGFileType properties:nil];
+  [imageData writeToFile:[options output] atomically:YES];
+  exit(0);
+}
+
+// TODO: change method name to reflect that other file types than PDF can be generated
 - (void)makePDF:(NSTimer *)theTimer {
   // theTimer arg is NULL if called directly without a timer.
   LOG_DEBUG(@"webView %@ makePDF", _webView);
   CommandlineParser * options = [CommandlineParser sharedInstance];
-  
-  if ([options paginate])
+
+  if ([options png]){
+    LOG_DEBUG(@"Writing PNG file");
+    [self makePNG];
+  } else if([options paginate]) {
     [self makePaginatedPDF];
-  else
+  } else {
     [self makeSinglePagePDF];
+  }
 }
 
 - (void)makePaginatedPDF {

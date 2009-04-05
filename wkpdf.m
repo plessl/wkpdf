@@ -18,11 +18,11 @@ int main (int argc,  char * argv[]) {
   
   // use 1x1 size: when pagination is turned off, the view should grow to the 
   // required size, if turned on, the view should use the page size. 
-  WebView * webView = [[WebView alloc] initWithFrame:NSMakeRect(0,0,1,1)
+  WebView * webView = [[WebView alloc] initWithFrame:NSMakeRect(0,0,1024,768)
                                            frameName:@"myFrame"
                                            groupName:@"myGroup"];
 
-  NSWindow * window = [[NSWindow alloc] initWithContentRect:NSMakeRect(0,0,1,1) 
+  NSWindow * window = [[NSWindow alloc] initWithContentRect:NSMakeRect(0,0,1024,768)
                                                   styleMask:NSBorderlessWindowMask 
                                                     backing:NSBackingStoreNonretained defer:NO];
   [window setContentView:webView];

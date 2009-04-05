@@ -95,13 +95,14 @@ const double DEFAULT_TIMEOUT_FOR_URLREQUEST = 24 * 60 * 60.0;
   _ignoreHttpErrors = NO;
   _username = @"";
   _password = @"";
+  _png = NO;
   return parser;
 }
   
 int opt_source, opt_output, opt_format, opt_paginate, opt_orientation;
 int opt_hcenter, opt_vcenter, opt_help, opt_caching, opt_timeout, opt_saveDelay;
 int opt_margin, opt_media, opt_background, opt_httperror;
-int opt_username, opt_password, opt_plugins;
+int opt_username, opt_password, opt_plugins, opt_png;
 int dummy;
 
 /* options descriptor */
@@ -126,6 +127,7 @@ static struct option longopts[] = {
   { "paginate",             required_argument,  &opt_paginate,   1 },  // 17
   { "enable-plugins",       required_argument,  &opt_plugins,    1 },  // 18
   { "save-delay",           required_argument,  &opt_saveDelay,  1 },  // 19
+  { "png",                  no_argument,        &opt_png,        1 },  // 20
   { NULL,                   0,                  NULL,            0 }
 };
 
@@ -140,7 +142,7 @@ static struct option longopts[] = {
   
   opt_source = opt_output = opt_format = opt_orientation = 0;
   opt_hcenter = opt_vcenter = opt_help = opt_caching = opt_timeout = 0;
-  opt_paginate = opt_plugins = 0;
+  opt_paginate = opt_plugins = opt_png = 0;
   
   while ((ch = getopt_long(argc, argv, "", longopts, &option_index)) != -1)
     
@@ -256,6 +258,12 @@ static struct option longopts[] = {
             _saveDelay = [[self parseDecimalNumber:optarg argName:@"--save-delay"] doubleValue];
             LOG_DEBUG(@"_saveDelay: %f", _saveDelay);            
             break;
+
+          case 20: // --png
+            LOG_DEBUG(@"option: --png");
+            _png = YES;
+            break;
+
         }        
       break;
         
@@ -285,6 +293,7 @@ return ""
 "usage: wkpdf <options>\n"
 "  --source URL|file         URL or file to be converted to PDF (mandatory)\n"  
 "  --output file             filename for the PDF (mandatory)\n"
+"  --png                     save rendered webpage in PNG format instead of PDF\n"
 "  --portrait                use portrait paper orientation\n"
 "  --landscape               use landscape paper orientation\n"
 "  --hcenter                 center output horizontally\n"
@@ -411,6 +420,11 @@ return ""
 - (NSString *)password
 {
   return [[_password copy] autorelease];
+}
+
+- (BOOL)png
+{
+  return _png;
 }
 
 #pragma mark helper functions

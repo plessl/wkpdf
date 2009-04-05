@@ -29,6 +29,7 @@
   BOOL _ignoreHttpErrors;
   NSString * _username;
   NSString * _password;
+  BOOL _png;
 }
 
 + (CommandlineParser *)sharedInstance;
@@ -57,6 +58,7 @@
 - (BOOL)ignoreHttpErrors;
 - (NSString *)username;
 - (NSString *)password;
+- (BOOL)png;
 
 #pragma mark helper methods
 - (NSSize)parsePaperSize:(char *)arg;
