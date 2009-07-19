@@ -1,0 +1,47 @@
+/* colors
+  c1: #332C28
+  c2: #744137
+  c3: #AFAB8A
+  c4: #EBC28F
+  c5: #FCD6B1
+*/
+
+body {
+  background-color: #332C28;
+  font-family: Geneva, "Lucida Grande", Arial, sans-serif;
+}
+
+p {
+  line-height: 140%;
+}
+
+#sidebar {
+  margin-top 20px;
+  float: left;
+  width: 180px;
+}
+
+#sidebar > a {
+  color: #FFF;
+}
+
+
+#sidebar > ul {
+  list-style-type: none;
+}
+
+#sidebar > ul > a {
+}
+
+#content {
+  margin-top: 20px;
+  float: left;
+  width: 700px;
+  align: center;
+  background-color: #FFF;
+  
+  padding: 50px;
+  
+  -webkit-box-shadow: 0 0 35px  #000;
+}
+
