@@ -7,7 +7,7 @@
 */
 
 body {
-  background-color: #332C28;
+  background-color: #70635e;
   font-family: Geneva, "Lucida Grande", Arial, sans-serif;
 }
 
@@ -16,13 +16,16 @@ p {
 }
 
 #sidebar {
-  margin-top 20px;
+  margin-top:; 20px;
+  padding-top: 20px;
   float: left;
   width: 180px;
+  
 }
 
-#sidebar > a {
+#sidebar a {
   color: #FFF;
+  text-decoration: none;
 }
 
 
@@ -38,10 +41,18 @@ p {
   float: left;
   width: 700px;
   align: center;
-  background-color: #FFF;
+  background-color: #fdf2e4;
   
   padding: 50px;
   
-  -webkit-box-shadow: 0 0 35px  #000;
+  -webkit-box-shadow: 0 0 35px #000;
+  -moz-box-shadow: 0 0 35px #000;
+  
 }
 
+pre {
+  background: #333333;
+  color: white;
+  padding: 15px;
+  border: 1px solid #666666;
+}
