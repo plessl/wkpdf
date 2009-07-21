@@ -7,6 +7,7 @@
 */
 
 body {
+//  background-color: #333333;
   background-color: #70635e;
   font-family: Geneva, "Lucida Grande", Arial, sans-serif;
 }
@@ -54,5 +55,8 @@ pre {
   background: #333333;
   color: white;
   padding: 15px;
-  border: 1px solid #666666;
+}
+
+ul {
+  list-style-type: square;
 }
