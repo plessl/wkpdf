@@ -15,7 +15,7 @@ OSX::NSApplication.sharedApplication # create NSApp object
 
 class AppDelegate < NSObject
   def applicationDidFinishLaunching(aNotification)
-    puts "#{aNotification.name} makes me say: Hello, world\n"
+    # nothing
   end
 end
 
@@ -87,7 +87,7 @@ end
 
 pool = NSAutoreleasePool.alloc.init
 
-puts "wkpdf started\n"
+puts "wkpdf started\n" if parser.debug
 
 theURL = NSURL.URLWithString(parser.source)
 request = NSURLRequest.requestWithURL_cachePolicy_timeoutInterval(
