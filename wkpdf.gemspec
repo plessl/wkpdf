@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.email = %q{christian@plesslweb.ch}
   s.executables = ["wkpdf"]
   s.extra_rdoc_files = ["bin/wkpdf", "lib/commandline_parser.rb", "lib/controller.rb", "lib/version.rb", "lib/wkpdf.rb", "LICENSE", "README.rdoc", "TODO.txt"]
-  s.files = ["bin/wkpdf", "CONTRIBUTORS", "FAQ", "HOW_TO_RELEASE.txt", "lib/commandline_parser.rb", "lib/controller.rb", "lib/version.rb", "lib/wkpdf.rb", "LICENSE", "plesslweb.pdf", "Rakefile", "README.rdoc", "scripts/mirror-and-convert.rb", "test.html", "TODO.txt", "wkpdf.gemspec", "Manifest"]
+  s.files = ["bin/wkpdf", "CONTRIBUTORS", "FAQ", "HOW_TO_RELEASE.txt", "lib/commandline_parser.rb", "lib/controller.rb", "lib/version.rb", "lib/wkpdf.rb", "LICENSE", "Rakefile", "README.rdoc", "scripts/mirror-and-convert.rb", "test.html", "TODO.txt", "wkpdf.gemspec", "Manifest"]
   s.homepage = %q{http://github.com/plessl/wkpdf}
   s.rdoc_options = ["--line-numbers", "--inline-source", "--title", "Wkpdf", "--main", "README.rdoc"]
   s.require_paths = ["lib"]
