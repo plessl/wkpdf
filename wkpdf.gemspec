@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{wkpdf}
-  s.version = "0.2.1"
+  s.version = "0.2.2"
   s.platform = %q{darwin-*-*}
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
@@ -31,10 +31,8 @@ Gem::Specification.new do |s|
      "bin/wkpdf",
      "lib/commandline_parser.rb",
      "lib/controller.rb",
-     "lib/version.rb",
      "lib/wkpdf.rb",
      "scripts/mirror-and-convert.rb",
-     "test.html",
      "test/IdeasForTestcases.txt",
      "test/testcases/bounding-box-test-442px.html",
      "test/testcases/bounding-box-test-942px.html",
