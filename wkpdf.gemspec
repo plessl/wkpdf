@@ -22,7 +22,6 @@ Gem::Specification.new do |s|
      "FAQ",
      "HOW_TO_RELEASE.txt",
      "LICENSE",
-     "Manifest",
      "README.rdoc",
      "Rakefile",
      "TODO.txt",
