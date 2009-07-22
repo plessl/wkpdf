@@ -190,7 +190,7 @@ class Controller < NSObject
 private
 
   def log(msg)
-    $stderr.puts(msg)
+    $stderr.puts(msg) if CommandlineParser.instance.debug
   end
 
 
