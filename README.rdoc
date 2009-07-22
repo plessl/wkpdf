@@ -14,21 +14,9 @@ You find the latest information on wkpdf on:
  
 For questions regarding wkpdf contact: wkpdf@plesslweb.ch
 
-== WARNING
+== Usage and Installation
 
-I'm currently in the process of porting wkpdf to RubyCocoa. Currently this 
-reimplementation is not fully functional yet. For the moment I suggest to 
-use the Objective-C implementation available from http://wkpdf.plesslweb.ch
-for production use.
-
-
-== Install
-
-  sudo gem install plessl-wkpdf --source http://gems.github.com
-
-== Usage
-
-
+ see http://plessl.github.com/wkpdf
 
 == License
 
