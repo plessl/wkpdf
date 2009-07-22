@@ -4,7 +4,7 @@ require 'getoptlong'
 require 'optparse'
 require 'rdoc/usage'
 require 'osx/cocoa'
-require 'version'
+require 'yaml'
 
 class CommandlineParser
 
@@ -163,7 +163,9 @@ class CommandlineParser
       end
 
       opts.on_tail(:NONE, "-v", "--version", "print version number") do
-        puts "wkpdf version: #{Wkpdf::VERSION::STRING}\n"
+        version_file = "#{File.dirname(__FILE__)}/../VERSION.yml"
+        v = YAML::load(File.open( version_file ))
+        puts "wkpdf version: #{v[:major]}.#{v[:minor]}.#{v[:patch]}\n"
         NSApplication.sharedApplication.terminate(nil)
       end
 
