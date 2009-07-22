@@ -1,0 +1,16 @@
+bin/wkpdf
+CONTRIBUTORS
+FAQ
+HOW_TO_RELEASE.txt
+lib/commandline_parser.rb
+lib/controller.rb
+lib/version.rb
+lib/wkpdf.rb
+LICENSE
+Rakefile
+README.rdoc
+scripts/mirror-and-convert.rb
+test.html
+TODO.txt
+wkpdf.gemspec
+Manifest
