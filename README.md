@@ -1,4 +1,5 @@
-= wkpdf
+wkpdf
+=====
 
 Command line tool for rendering HTML to PDF using WebKit and RubyCocoa on Mac OS X
 
@@ -8,17 +9,14 @@ rendered website as PDF. This was my motivation for creating wkpdf. The
 application uses Apple WebKit for rendering the HTML pages, thus the result 
 should look similar to what you get when printing the webpage with Safari.
 
-You find the latest information on wkpdf on:
+You find the latest information on how to install and use wkpdf on:
 
- http://plessl.github.com/wkpdf
- 
+  [http://plessl.github.com/wkpdf](http://plessl.github.com/wkpd)
+
 For questions regarding wkpdf contact: wkpdf@plesslweb.ch
 
-== Usage and Installation
-
- see http://plessl.github.com/wkpdf
-
-== License
+License
+=======
 
 Copyright (c) 2007-09 Christian Plessl
 
