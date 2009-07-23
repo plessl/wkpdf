@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Christian Plessl"]
-  s.date = %q{2009-07-22}
+  s.date = %q{2009-07-23}
   s.default_executable = %q{wkpdf}
   s.description = %q{wkpdf renders HTML to PDF using WebKit on Mac OS X. wkpdf is implemented in RubyCocoa.}
   s.email = %q{christian@plesslweb.ch}
@@ -45,7 +45,7 @@ Gem::Specification.new do |s|
   s.homepage = %q{http://plessl.github.com/wkpdf}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.3.4}
+  s.rubygems_version = %q{1.3.5}
   s.summary = %q{Render HTML to PDF using WebKit.}
 
   if s.respond_to? :specification_version then
