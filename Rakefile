@@ -7,7 +7,7 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gemspec|
     gemspec.name         = "wkpdf"
-    gemspec.summary      = "Render HTML to PDF using WebKit (Requires Mac OS X 10.5.0 or later)"
+    gemspec.summary      = "Render HTML to PDF using WebKit"
     gemspec.description  = "wkpdf renders HTML to PDF using WebKit on Mac OS X. wkpdf is "
     gemspec.description  += "implemented in RubyCocoa."
     gemspec.requirements << "Mac OS X 10.5 or later"
