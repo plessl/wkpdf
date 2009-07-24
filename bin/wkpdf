@@ -1,8 +1,10 @@
 #!/usr/bin/env ruby
 
+begin
+  require 'osx/cocoa'
+rescue LoadError
+  puts "Platform not supported: wkpdf runs only on Mac OS X 10.5 and later"
+end
+
 wkpdf_rb = File.dirname(__FILE__) + "/../lib/wkpdf.rb"
-
-#puts "wkpdf_rb = #{wkpdf_rb}\n"
-#puts "ARGV = #{ARGV.join(' ')}\n"
-
 system("#{wkpdf_rb} #{ARGV.join(' ')}")

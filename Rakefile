@@ -10,7 +10,7 @@ begin
     gemspec.summary     = "Render HTML to PDF using WebKit."
     gemspec.description = "wkpdf renders HTML to PDF using WebKit on Mac OS X. wkpdf is "
     gemspec.description += "implemented in RubyCocoa."
-    gemspec.platform    = "darwin-*-*"
+#    gemspec.platform    = "darwin-*-*"
     gemspec.email       = "christian@plesslweb.ch"
     gemspec.homepage    = "http://plessl.github.com/wkpdf"
     gemspec.authors     = ["Christian Plessl"]

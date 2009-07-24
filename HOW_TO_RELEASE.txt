@@ -1,8 +1,13 @@
-rake manifest
+wkpdf uses Jeweler, see http://github.com/technicalpickles/jeweler/tree/master
 
-# test locally
+# Testing the gem locally
+rake build
 rake install
 
-# upload to github
-rake build_gemspec
-git push
+# Bumping the version
+rake version:bump:major
+rake version:bump:minor
+rake version:bump:patch
+
+# Release the gem (upload to github and tag)
+rake release
