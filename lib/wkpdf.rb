@@ -9,6 +9,13 @@ require 'commandline_parser'
 
 OSX::require_framework('/System/Library/Frameworks/WebKit.framework')
 
+def wkpdf_version
+  version_file = "#{File.dirname(__FILE__)}/../VERSION.yml"
+  v = YAML::load(File.open( version_file ))
+  return "#{v[:major]}.#{v[:minor]}.#{v[:patch]}"
+end
+
+
 OSX::NSApplication.sharedApplication # create NSApp object
 
 
@@ -73,7 +80,7 @@ webPrefs.setShouldPrintBackgrounds(parser.printBackground)
 controller = Controller.alloc.initWithWebView(webView)
 webView.setFrameLoadDelegate(controller)
 webView.setResourceLoadDelegate(controller)
-webView.setApplicationNameForUserAgent("wkpdf/" + Wkpdf::VERSION::STRING)
+webView.setApplicationNameForUserAgent("wkpdf/" + wkpdf_version)
 webView.setPreferences(webPrefs)
 webView.setMaintainsBackForwardList(false)
 
