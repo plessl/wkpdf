@@ -6,7 +6,6 @@ require 'osx/cocoa'
 include OSX
 require 'controller'
 require 'commandline_parser'
-require 'version'
 
 OSX::require_framework('/System/Library/Frameworks/WebKit.framework')
 
