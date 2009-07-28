@@ -7,4 +7,4 @@ rescue LoadError
 end
 
 wkpdf_rb = File.dirname(__FILE__) + "/../lib/wkpdf.rb"
-system("#{wkpdf_rb} #{ARGV.join(' ')}")
+system("/usr/bin/ruby #{wkpdf_rb} #{ARGV.join(' ')}")
