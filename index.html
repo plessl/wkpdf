@@ -16,6 +16,7 @@
 <ul>
   <li><a href="#installation">Installation</a></li>
   <li><a href="#usage">Usage</a></h1>
+  <li><a href="#developers">Developers</a></h1>
   <li><a href="#faq">Recipes and FAQ</a></li>
   <li><a href="#support">Support</a></li>
   <li><a href="#license">License</a></li>
@@ -64,9 +65,18 @@ sudo gem install plessl-wkpdf --source http://gems.github.com
 </p>
 
 <p>
-If you are a developer and you would like to extend wkpdf you can browse and clone wkpdf's git repository at: <a href="http://github.com/plessl/wkpdf/tree/master">http://github.com/plessl/wkpdf/tree/master</a>.
+After installing wkpdf, you can always update to the latest version with:
+<pre>
+gem update plessl-wkpdf --source http://gems.github.com
+</pre>
 </p>
 
+<p>
+You can also add gems.github.com permanently as a source for gem packages to your Ruby installation, which allows you to omit the <code>--source http://gems.github.com</code> part of the gem command in future like this:
+<pre>
+gem sources -a http://gems.github.com
+</pre>
+</p>
 
 
 <h1 id="usage">Usage</h1>
@@ -111,6 +121,10 @@ wkpdf --source http://www.slashdot.org --stylesheet-media screen \
 </pre>
 </p>
 
+<h1 id="developers">Developers</h1>
+<p>
+If you are a developer and you would like to extend wkpdf you can browse and clone wkpdf's git repository at: <a href="http://github.com/plessl/wkpdf/tree/master">http://github.com/plessl/wkpdf/tree/master</a>.
+</p>
 
 
 <h1 id="faq">Recipes and FAQ</h1>
