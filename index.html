@@ -24,6 +24,18 @@
   
 <div id="content">
 
+  <!-- new navigation
+  <div id="nav">
+  <ul>
+    <li><a href="#installation">Installation</a></li>
+    <li><a href="#usage">Usage</a></h1>
+    <li><a href="#developers">Developers</a></h1>
+    <li><a href="#faq">Recipes and FAQ</a></li>
+    <li><a href="#support">Support</a></li>
+    <li><a href="#license">License</a></li>
+  </div>
+  -->
+
 <h1>What is wkpdf</h1>
 
 <p>
@@ -58,14 +70,24 @@
 
 <p>
 wkpdf is an open-source software project hosted at <a href="http://github.com">github.com</a>.
-wkpdf is bundled as a Ruby Gem which means that it can be easily installed on Mac OS X 10.5.x and later using the following command:
+wkpdf is bundled as a Ruby gem which means that it can be easily installed on Mac OS X 10.5.x and later with the RubyGems package manager that comes pre-installed with Mac OS X.
+</p>
+<p>
+Installing the wkpdf gem from Github requires a recent version of RubyGems. If you don't have installed RubyGems version 1.2.0 or later, you can update to the latest version with:
+<pre>
+sudo gem upgrade --system
+</pre>
+</p>
+
+<p>
+Now you can proceed with the installation of wkpdf with the the following command:
 <pre>
 sudo gem install plessl-wkpdf --source http://gems.github.com
 </pre>
 </p>
 
 <p>
-After installing wkpdf, you can always update to the latest version with:
+After wkpdf has been installed once, you can always update to the latest version with:
 <pre>
 gem update plessl-wkpdf --source http://gems.github.com
 </pre>
