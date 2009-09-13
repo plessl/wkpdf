@@ -502,10 +502,8 @@ return ""
 
 - (NSString *)getVersionString
 {
-  unsigned revisionLength = [WKPDF_SVN_REVISION length] - 8;
-  NSString * revString = [WKPDF_SVN_REVISION substringWithRange:NSMakeRange(6,revisionLength)];
-  NSString * version = [NSString stringWithFormat:@"%d.%d.%d (r%@)",
-    WKPDF_VERSION_MAJOR, WKPDF_VERSION_MINOR, WKPDF_VERSION_SUBMINOR, revString];
+  NSString * version = [NSString stringWithFormat:@"%d.%d.%d",
+    WKPDF_VERSION_MAJOR, WKPDF_VERSION_MINOR, WKPDF_VERSION_SUBMINOR];
   return [version autorelease];
 }
 
