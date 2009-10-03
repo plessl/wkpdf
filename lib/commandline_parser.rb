@@ -179,7 +179,16 @@ class CommandlineParser
         NSApplication.sharedApplication.terminate(nil)
       end
       
+      if args.empty?
+        puts opts
+        NSApplication.sharedApplication.terminate(nil)
+      end
+
       opts.parse!(args)
+
+      # TODO
+      # check if mandatory arguments --source and --output are specified
+
     end
   end
 
