@@ -3,7 +3,10 @@
 begin
   require 'osx/cocoa'
 rescue LoadError
-  puts "Platform not supported: wkpdf runs only on Mac OS X 10.5 and later"
+  puts "Cannot load RubyCocoa library"
+  puts "wkpdf requires that RubyCocoa is installed, which is shipped by default since"
+  puts "Mac OS X 10.5. If you use Mac OS X 10.4, you have to install RubyCocoa"
+  puts "yourself from http://rubycocoa.sourceforge.net/HomePage"
 end
 
 wkpdf_rb = File.dirname(__FILE__) + "/../lib/wkpdf.rb"
