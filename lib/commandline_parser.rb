@@ -37,7 +37,8 @@ class CommandlineParser
     # @source = [NSURL fileURLWithPath:@"/dev/stdin"];
     # @output = @"/dev/stdout";
 
-    @paperSize = NSPrintInfo.sizeForPaperName('A4')
+    generic_printer = NSPrinter.printerWithType("Generic PostScript Printer")
+    @paperSize = generic_printer.pageSizeForPaper('A4')
     @paginate = true
     @margin = -1.0
     @stylesheetMedia = ""
@@ -221,7 +222,8 @@ class CommandlineParser
 
   def parsePaperSize(arg)
     paperName = NSString.stringWithUTF8String(arg)
-    size = NSPrintInfo.sizeForPaperName(paperName)
+    generic_printer = NSPrinter.printerWithType("Generic PostScript Printer")
+    size = generic_printer.pageSizeForPaper('A4')
     if ((size.width == 0.0) || (size.height == 0.0)) then
       puts "#{paperName} is not a valid paper format\n"
       NSApplication.sharedApplication.terminate(nil)
