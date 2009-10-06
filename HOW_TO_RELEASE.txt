@@ -1,6 +1,7 @@
 wkpdf uses Jeweler, see http://github.com/technicalpickles/jeweler/tree/master
 
 # Testing the gem locally
+rake gemspec
 rake build
 rake install
 
