@@ -37,8 +37,7 @@ class CommandlineParser
     # @source = [NSURL fileURLWithPath:@"/dev/stdin"];
     # @output = @"/dev/stdout";
 
-    generic_printer = NSPrinter.printerWithType("Generic PostScript Printer")
-    @paperSize = generic_printer.pageSizeForPaper('A4')
+    @paperSize = NSMakeSize(595,842) # use A4 format as default
     @paginate = true
     @margin = -1.0
     @stylesheetMedia = ""
@@ -230,11 +229,29 @@ class CommandlineParser
   end
 
   def parsePaperSize(arg)
-    paperName = NSString.stringWithUTF8String(arg)
-    generic_printer = NSPrinter.printerWithType("Generic PostScript Printer")
-    size = generic_printer.pageSizeForPaper('A4')
-    if ((size.width == 0.0) || (size.height == 0.0)) then
-      puts "#{paperName} is not a valid paper format\n"
+
+    size = case arg.downcase
+      when "letter"      then NSMakeSize(612,792)
+      when "letterSmall" then NSMakeSize(612,792)
+      when "tabloid"     then NSMakeSize(792,1224)
+      when "ledger"      then NSMakeSize(1224,792)
+      when "legal"       then NSMakeSize(612,1008)
+      when "statement"   then NSMakeSize(396,612)
+      when "executive"   then NSMakeSize(540,720)
+      when "a0"          then NSMakeSize(2384,3371)
+      when "a1"          then NSMakeSize(1685,2384)
+      when "a2"          then NSMakeSize(1190,1684)
+      when "a3"          then NSMakeSize(842,1190)
+      when "a4"          then NSMakeSize(595,842)
+      when "a4small"     then NSMakeSize(595,842)
+      when "a5"          then NSMakeSize(420,595)
+      when "b4"          then NSMakeSize(729,1032)
+      when "b5"          then NSMakeSize(516,729)
+      when "folio"       then NSMakeSize(612,936)
+      when "quarto"      then NSMakeSize(610,780)
+      when "10x14"       then NSMakeSize(720,1008)
+    else
+      puts "#{arg} is not a valid paper format\n"
       NSApplication.sharedApplication.terminate(nil)
     end
     return size
