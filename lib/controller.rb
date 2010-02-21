@@ -30,7 +30,7 @@ class Controller < NSObject
     end
 
     @saveTimer.invalidate unless @saveTimer.nil?
-    @saveTimer = NSTimer.scheduledTimerWithTimeInterval_target_selector_userInfo_repeat(
+    @saveTimer = NSTimer.scheduledTimerWithTimeInterval_target_selector_userInfo_repeats(
       p.saveDelay, self, :makePDF_, @saveTimer, false)
     makePDF(nil)
   end
