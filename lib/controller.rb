@@ -24,6 +24,10 @@ class Controller < NSObject
       self.checkResponseCodeforFrame(sender,frame)
     end
 
+    if p.userScript != "" then
+      self.loadUserScript(sender,p.userScript)
+    end
+
     if p.saveDelay <= 0 then
       makePDF(nil)
       return
@@ -177,6 +181,22 @@ class Controller < NSObject
 
     puts "could not load resource #{response.URL.absoluteString}, HTTP status code #{statusCode}\n"
     NSApplication.sharedApplication.terminate(nil)
+  end
+
+  def loadUserScript(sender,location)
+    p = CommandlineParser.instance
+    theURL = NSURL.URLWithString(location)
+    urlRequest = NSURLRequest.requestWithURL_cachePolicy_timeoutInterval(theURL, p.cachingPolicy, p.timeout) 
+    data, resp, error = NSURLConnection.sendSynchronousRequest_returningResponse_error(urlRequest)
+    if error.nil? then
+      js = NSString.alloc.initWithData_encoding(data, NSUTF8StringEncoding)
+      sender.stringByEvaluatingJavaScriptFromString(js)
+    else
+      log("Could not load user script #{p.userScript}, error: #{error.localizedDescription}")
+      if !p.ignoreHttpErrors then
+        NSApplication.sharedApplication.terminate(nil)
+      end
+    end
   end
 
 

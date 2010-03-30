@@ -75,6 +75,12 @@ webPrefs.setJavaScriptEnabled(true)
 webPrefs.setJavaScriptCanOpenWindowsAutomatically(false)
 webPrefs.setShouldPrintBackgrounds(parser.printBackground)
 
+if parser.userStylesheet != "" then
+  webPrefs.setUserStyleSheetEnabled(true)
+  webPrefs.setUserStyleSheetLocation(NSURL.URLWithString(parser.userStylesheet))
+  puts "setting user style sheet to #{parser.userStylesheet}\n" if parser.debug
+end
+
 controller = Controller.alloc.initWithWebView(webView)
 webView.setFrameLoadDelegate(controller)
 webView.setResourceLoadDelegate(controller)

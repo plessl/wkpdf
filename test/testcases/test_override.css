@@ -1,0 +1,8 @@
+h1 {
+  background-color: #ccf;
+  color: #c0c ! important;
+}
+
+body:before {
+  content: "CSS is overriden by user style sheet";
+}

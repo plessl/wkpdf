@@ -17,6 +17,8 @@ class CommandlineParser
   attr_accessor :paginate                 # boolean
   attr_accessor :margin                   # float
   attr_accessor :stylesheetMedia          # String
+  attr_accessor :userStylesheet           # String
+  attr_accessor :userScript               # String
   attr_accessor :printBackground          # boolean
   attr_accessor :paperOrientation         # NSPrintingOrientation
   attr_accessor :horizontallyCentered     # boolean
@@ -41,6 +43,8 @@ class CommandlineParser
     @paginate = true
     @margin = -1.0
     @stylesheetMedia = ""
+    @userStylesheet = ""
+    @userScript = ""
     @printBackground = false
     @paperOrientation = NSPortraitOrientation
     @horizontallyCentered = false
@@ -125,6 +129,16 @@ class CommandlineParser
       opts.on(:REQUIRED, "--stylesheet-media media",
         "set the CSS media value (default: 'screen')") do |arg|
         @stylesheetMedia = arg
+      end
+
+      opts.on(:REQUIRED, "--user-stylesheet URL|file",
+        "use the specified stylesheet as user style sheet (default: '')") do |arg|
+        @userStylesheet = parseSourcePathOrURL(arg)
+      end
+
+      opts.on(:REQUIRED, "--user-script URL|file",
+        "inject the script after the source loads (default: '')") do |arg|
+        @userScript = parseSourcePathOrURL(arg)
       end
 
       opts.on(:REQUIRED, "--print-background yes|no",
