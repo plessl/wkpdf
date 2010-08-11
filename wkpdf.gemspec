@@ -52,7 +52,7 @@ Gem::Specification.new do |s|
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.requirements = ["Mac OS X 10.5 or later", "RubyCocoa"]
-  s.rubygems_version = %q{1.3.5}
+  s.rubygems_version = %q{1.3.6}
   s.summary = %q{Render HTML to PDF using WebKit}
   s.test_files = [
     "test/rubycocoa/NSPrinterTest.rb"
