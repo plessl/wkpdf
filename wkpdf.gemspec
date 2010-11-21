@@ -5,12 +5,12 @@
 
 Gem::Specification.new do |s|
   s.name = %q{wkpdf}
-  s.version = "0.3.10"
+  s.version = "0.3.11"
   s.platform = %q{universal-darwin}
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Christian Plessl"]
-  s.date = %q{2010-08-11}
+  s.date = %q{2010-11-20}
   s.default_executable = %q{wkpdf}
   s.description = %q{wkpdf renders HTML to PDF using WebKit on Mac OS X. wkpdf is implemented in RubyCocoa.}
   s.email = %q{wkpdf@plesslweb.ch}
@@ -52,7 +52,7 @@ Gem::Specification.new do |s|
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.requirements = ["Mac OS X 10.5 or later", "RubyCocoa"]
-  s.rubygems_version = %q{1.3.6}
+  s.rubygems_version = %q{1.3.7}
   s.summary = %q{Render HTML to PDF using WebKit}
   s.test_files = [
     "test/rubycocoa/NSPrinterTest.rb"
@@ -62,7 +62,7 @@ Gem::Specification.new do |s|
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
     s.specification_version = 3
 
-    if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
+    if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
     else
     end
   else
