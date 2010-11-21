@@ -36,8 +36,9 @@ class CommandlineParser
 
   def configure_defaults
 
-    # @source = [NSURL fileURLWithPath:@"/dev/stdin"];
-    # @output = @"/dev/stdout";
+    @source = parseSourcePathOrURL("/dev/stdin")
+
+#    @output = parseOutputPath("/dev/stdout")
 
     @paperSize = NSMakeSize(595,842) # use A4 format as default
     @paginate = true
@@ -65,22 +66,21 @@ class CommandlineParser
     configure_defaults
 
     opts = OptionParser.new do |opts|
-      opts.banner = "Usage: wkpdf [options]"
-      opts.separator ""
+      opts.banner = "Usage: wkpdf [options]\n\n"
 
       opts.separator "Mandatory arguments:"
 
-      opts.on(:REQUIRED, "--source URL|file",
-        "URL or file to be converted to PDF (required argument)") do |arg|
-        @source = parseSourcePathOrURL(arg)
-      end
-
       opts.on(:REQUIRED, "--output file",
-        "filename for the PDF (required argument)") do |arg|
+        "filename for the PDF") do |arg|
         @output = parseOutputPath(arg)
       end
 
       opts.separator "Options:"
+
+      opts.on(:REQUIRED, "--source URL|file",
+        "URL or file to be converted to PDF, if unspecified standard input is read") do |arg|
+        @source = parseSourcePathOrURL(arg)
+      end
 
       opts.on(:REQUIRED, "--format",
         "select paper format (valid values are e.g. A4, A5, A3, Legal, Letter, Executive) CAUTION: these values are case-sensitive") do |arg|
@@ -193,14 +193,12 @@ class CommandlineParser
       end
       
       if args.empty?
+        puts "not all mandatory arguments specified\n\n"
         puts opts
         NSApplication.sharedApplication.terminate(nil)
       end
 
       opts.parse!(args)
-
-      # TODO
-      # check if mandatory arguments --source and --output are specified
 
     end
   end

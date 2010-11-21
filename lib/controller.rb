@@ -166,7 +166,7 @@ class Controller < NSObject
 
     log("Create PDF\n")
     data = viewToPrint.dataWithPDFInsideRect(r)
-    log("Save PDF\n")
+    log("Save PDF to file #{p.output}\n")
     data.writeToFile_atomically(p.output,true)
     log("Terminate application\n")
     NSApplication.sharedApplication.terminate(nil)
