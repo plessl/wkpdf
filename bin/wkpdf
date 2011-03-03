@@ -1,13 +1,6 @@
 #!/usr/bin/ruby
+$:.unshift File.dirname(__FILE__) + "/../lib"
 
-begin
-  require 'osx/cocoa'
-rescue LoadError
-  puts "Cannot load RubyCocoa library"
-  puts "wkpdf requires that RubyCocoa is installed, which is shipped by default since"
-  puts "Mac OS X 10.5. If you use Mac OS X 10.4, you have to install RubyCocoa"
-  puts "yourself from http://rubycocoa.sourceforge.net/HomePage"
-end
+require 'wkpdf'
 
-wkpdf_rb = File.dirname(__FILE__) + "/../lib/wkpdf.rb"
-system("/usr/bin/ruby #{wkpdf_rb} #{ARGV.join(' ')}")
+WKPDF::main()

@@ -1,5 +1,3 @@
-$LOAD_PATH << File.dirname(__FILE__)
-
 require 'rdoc/usage'
 require 'osx/cocoa'
 require 'yaml'
@@ -14,7 +12,7 @@ class CommandlineParser
   attr_accessor :output                   # String
   attr_accessor :paperSize                # NSSize
   attr_accessor :paginate                 # boolean
-  attr_accessor :margins                  # [float]
+  attr_accessor :margins                  # [float, float, float, float]
   attr_accessor :stylesheetMedia          # String
   attr_accessor :userStylesheet           # String
   attr_accessor :userScript               # String
@@ -54,33 +52,36 @@ class CommandlineParser
       "quarto"      => [610,780],
       "10x14"       => [720,1008]
     }
-
+    orientations = {
+      'landscape' => NSLandscapeOrientation,
+      'portrait' => NSPortraitOrientation,
+    }
     v = YAML::load_file(File.join(File.dirname(__FILE__), '../VERSION.yml'))
     opts = Trollop::options do
       version "wkpdf #{v[:major]}.#{v[:minor]}.#{v[:patch]}"
       banner "Usage: wkpdf [options]\n\n"
-      opt :output, "output PDF filename", :required => true, :default => '/dev/stdout'
-      opt :source, "URL or filename", :default => '/dev/stdin'
+      opt :output, "output PDF filename", :required => true, :type => :string, :short => 'o'
+      opt :source, "URL or filename", :required => true, :type => :string, :short => 's'
       opt :paper, "paper size (#{paper_sizes.keys.join(' | ')})", :required => true, :default => 'letter'
-      opt :orientation, '(landscape | portrait)', :default => 'portrait'
+      opt :orientation, "(#{orientations.keys.join(' | ')})", :default => 'portrait'
       opt :hcenter, "Center horizontally", :short => 'c', :default => true
       opt :vcenter, "Center vertically", :default => true
       opt :paginate, 'Enable pagination', :default => true
-      opt :margins, 'Paper margins in points (T R B L) (V H) or (M)', :default => [-1.0,-1.0,-1.0,-1.0], :type => :floats
+      opt :margins, 'Paper margins in points (T R B L) (V H) or (M)', :short => 'm', :default => [-1.0,-1.0,-1.0,-1.0]
       opt :caching, 'Load from cache if possible', :default => true
       opt :timeout, 'Set timeout to N seconds', :default => 3600.00
       opt :stylesheet_media, 'Set the CSS media value', :default => 'screen' 
       opt :user_stylesheet, 'URL or path of stylesheet to use', :type => :string
       opt :user_script, 'URL or path of script to use', :type => :string
       opt :print_background, 'display background images', :default => false
-      opt :ignore_http_errors, "generate PDF despite error", :default => false
+      opt :ignore_http_errors, "generate PDF despite, e.g., a 404 error", :default => false
       opt :username, 'Authenticate with username', :type => :string
       opt :password, 'Authenticate with password', :type => :string
       opt :enable_plugins, 'Enable plugins', :default => false
-      opt :save_delay, "Wait for N seconds after page is loaded before generating the PDF", :default => 0.0
+      opt :save_delay, "Wait N seconds after loading to generate PDF", :default => 0.0
       opt :version, 'Print the version and exit', :short => 'v'
       opt :help, 'Show this message', :short => 'h'
-      opt :debug, 'print debug output', :default => false, :short => 'd'
+      opt :debug, 'Print debug output', :default => false, :short => 'd'
     end
     
     @output = parseOutputPath(opts[:output])
@@ -90,8 +91,12 @@ class CommandlineParser
     @userScript = opts[:user_script] ?
       parseSourcePathOrURL(opts[:user_script]) : ''
     
-    @paperOrientation = opts[:orientation] == 'portrait' ?
-      NSPortraitOrientation : NSLandscapeOrientation
+    unless orientations.include?(opts[:orientation])
+      Trollop::die :orientation, 'unrecognized page orientation'
+      NSApplication.sharedApplication.terminate(nil)
+    end
+    @paperOrientation = orientations[opts[:orientation]]
+    
     @cachingPolicy = opts[:cachingPolicy] ?
       NSURLRequestUseProtocolCachePolicy : NSURLRequestUseProtocolCachePolicy
     
@@ -110,7 +115,6 @@ class CommandlineParser
       Trollop::die :margins, 'malformed margins option'
       NSApplication.sharedApplication.terminate(nil)
     end
-    
     
     [:output, :debug, :timeout, :paginate, :username, :password].each do |k|
       instance_variable_set "@#{k}", opts[k]
