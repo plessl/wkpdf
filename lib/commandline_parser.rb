@@ -66,7 +66,7 @@ class CommandlineParser
       opt :hcenter, "Center horizontally", :short => 'c', :default => true
       opt :vcenter, "Center vertically", :default => true
       opt :paginate, 'Enable pagination', :default => true
-      opt :margins, 'Paper margins in points (t, r, b, l) (v, h) or (all)', :default => [-1.0,-1.0,-1.0,-1.0]
+      opt :margins, 'Paper margins in points (T R B L) (V H) or (M)', :default => [-1.0,-1.0,-1.0,-1.0], :type => :floats
       opt :caching, 'Load from cache if possible', :default => true
       opt :timeout, 'Set timeout to N seconds', :default => 3600.00
       opt :stylesheet_media, 'Set the CSS media value', :default => 'screen' 
@@ -96,21 +96,21 @@ class CommandlineParser
       NSURLRequestUseProtocolCachePolicy : NSURLRequestUseProtocolCachePolicy
     
     opts[:paper] = opts[:paper].downcase
-    unless paper_sizes.include?(opts[:paper])
+    unless paper_sizes.has_key?(opts[:paper])
       Trollop::die :paper, 'unrecognized paper size'
       NSApplication.sharedApplication.terminate(nil)
     end
-    
-    @margins = opts[:margins]
-    case @margins.count
-    when 1
-      @margins = @margins * 4
-    when 2
-      @margins = [@margins[0], @margins[1]] * 2
-    end
-    
     dimensions = paper_sizes[opts[:paper]]
     @paperSize = NSMakeSize(dimensions[0], dimensions[1])
+    
+    @margins = opts[:margins]
+    @margins = @margins * 4 if @margins.count == 1
+    @margins = [@margins[0], @margins[1]] * 2 if @margins.count == 2
+    unless @margins.count == 4
+      Trollop::die :margins, 'malformed margins option'
+      NSApplication.sharedApplication.terminate(nil)
+    end
+    
     
     [:output, :debug, :timeout, :paginate, :username, :password].each do |k|
       instance_variable_set "@#{k}", opts[k]
