@@ -55,7 +55,7 @@ class CommandlineParser
       "10x14"       => [720,1008]
     }
 
-    v = YAML::load(File.open('VERSION.yml'))
+    v = YAML::load_file(File.join(File.dirname(__FILE__), '../VERSION.yml'))
     opts = Trollop::options do
       version "wkpdf #{v[:major]}.#{v[:minor]}.#{v[:patch]}"
       banner "Usage: wkpdf [options]\n\n"
