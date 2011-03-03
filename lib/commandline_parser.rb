@@ -1,10 +1,9 @@
 $LOAD_PATH << File.dirname(__FILE__)
 
-require 'getoptlong'
-require 'optparse'
 require 'rdoc/usage'
 require 'osx/cocoa'
 require 'yaml'
+require 'trollop'
 
 class CommandlineParser
 
@@ -15,7 +14,7 @@ class CommandlineParser
   attr_accessor :output                   # String
   attr_accessor :paperSize                # NSSize
   attr_accessor :paginate                 # boolean
-  attr_accessor :margin                   # float
+  attr_accessor :margins                  # [float]
   attr_accessor :stylesheetMedia          # String
   attr_accessor :userStylesheet           # String
   attr_accessor :userScript               # String
@@ -31,242 +30,125 @@ class CommandlineParser
   attr_accessor :username                 # String
   attr_accessor :password                 # String
   attr_accessor :debug                    # boolean
-
-  attr_accessor :opts                     # OptionParser
-
-  def configure_defaults
-
-    @source = parseSourcePathOrURL("/dev/stdin")
-
-#    @output = parseOutputPath("/dev/stdout")
-
-    @paperSize = NSMakeSize(595,842) # use A4 format as default
-    @paginate = true
-    @margin = -1.0
-    @stylesheetMedia = ""
-    @userStylesheet = ""
-    @userScript = ""
-    @printBackground = false
-    @paperOrientation = NSPortraitOrientation
-    @horizontallyCentered = false
-    @verticallyCentered = false
-    @cachingPolicy = NSURLRequestUseProtocolCachePolicy
-    @timeout = 3600.0
-    @saveDelay = 0.0
-    @enablePlugins = false
-    @ignoreHttpErrors = false
-    @username = ""
-    @password = ""
-    @debug = false
   
-  end
+  def parse()
 
-  def parse_commandline_optparse(args)
+    paper_sizes = {
+      "letter"      => [612,792],
+      "letterSmall" => [612,792],
+      "tabloid"     => [792,1224],
+      "ledger"      => [1224,792],
+      "legal"       => [612,1008],
+      "statement"   => [396,612],
+      "executive"   => [540,720],
+      "a0"          => [2384,3371],
+      "a1"          => [1685,2384],
+      "a2"          => [1190,1684],
+      "a3"          => [842,1190],
+      "a4"          => [595,842],
+      "a4small"     => [595,842],
+      "a5"          => [420,595],
+      "b4"          => [729,1032],
+      "b5"          => [516,729],
+      "folio"       => [612,936],
+      "quarto"      => [610,780],
+      "10x14"       => [720,1008]
+    }
 
-    configure_defaults
-
-    opts = OptionParser.new do |opts|
-      opts.banner = "Usage: wkpdf [options]\n\n"
-
-      opts.separator "Mandatory arguments:"
-
-      opts.on(:REQUIRED, "--output file",
-        "filename for the PDF") do |arg|
-        @output = parseOutputPath(arg)
-      end
-
-      opts.separator "Options:"
-
-      opts.on(:REQUIRED, "--source URL|file",
-        "URL or file to be converted to PDF, if unspecified standard input is read") do |arg|
-        @source = parseSourcePathOrURL(arg)
-      end
-
-      opts.on(:REQUIRED, "--format",
-        "select paper format (valid values are e.g. A4, A5, A3, Legal, Letter, Executive) CAUTION: these values are case-sensitive") do |arg|
-        @paperSize = parsePaperSize(arg)
-      end
-
-      opts.on(:NONE, "--portrait",
-        "use portrait paper orientation") do
-         @paperOrientation = NSPortraitOrientation
-      end
-
-      opts.on(:NONE, "--landscape",
-        "use landscape paper orientation") do
-         @paperOrientation = NSLandscapeOrientation
-      end
-
-      opts.on(:NONE, "--hcenter",
-        "center output horizontally") do
-        @horizontallyCentered = true
-      end
-
-      opts.on(:NONE, "--vcenter",
-        "center output vertically") do
-        @verticallyCentered = true
-      end
-
-      opts.on(:REQUIRED, "--caching yes|no",
-        "retrieve website from cache if available (default: yes)") do |arg|
-        if (arg == "no") then
-          @cachingPolicy = NSURLRequestUseProtocolCachePolicy
-        else
-          @cachingPolicy = NSURLRequestUseProtocolCachePolicy
-        end
-      end
-
-      opts.on(:REQUIRED, "--timeout N",
-        "set timeout to N seconds, default: no timeout\n") do |arg|
-        @timeout = Float(arg)
-      end
-
-      opts.on(:REQUIRED, "--margin size",
-        "set paper margin in points (same margin for all margins") do |arg|
-        @margin = Float(arg)
-      end
-
-      opts.on(:REQUIRED, "--stylesheet-media media",
-        "set the CSS media value (default: 'screen')") do |arg|
-        @stylesheetMedia = arg
-      end
-
-      opts.on(:REQUIRED, "--user-stylesheet URL|file",
-        "use the specified stylesheet as user style sheet (default: '')") do |arg|
-        @userStylesheet = parseSourcePathOrURL(arg)
-      end
-
-      opts.on(:REQUIRED, "--user-script URL|file",
-        "inject the script after the source loads (default: '')") do |arg|
-        @userScript = parseSourcePathOrURL(arg)
-      end
-
-      opts.on(:REQUIRED, "--print-background yes|no",
-        "display background images (default: no)") do |arg|
-        @printBackground = true if (arg == "yes")
-      end
-
-      opts.on(:REQUIRED, "--paginate yes|no",
-        "enable pagination of output (default: yes), output page is resized to fit content when paginate=no") do |arg|
-        @paginate = (arg == "yes")
-      end
-
-      opts.on(:REQUIRED, "--ignore-http-errors yes|no",
-        "generate PDF even if server error occur (e.g. server returns 404 Not Found errors.)") do |arg|
-        @ignoreHttpErrors = (arg == "yes")
-      end
-
-      opts.on(:REQUIRED, "--username user",
-        "authenticate with this username user") do |arg|
-        @username = arg
-      end
-
-      opts.on(:REQUIRED, "--password pwd",
-        "authenticate with this username user") do |arg|
-        @password = arg
-      end
-
-      opts.on(:REQUIRED, "--enable-plugins yes|no",
-        "enable plugins (default: no)") do |arg|
-        @enablePlugins = (arg == "yes")
-      end
-
-      opts.on(:REQUIRED, "--save-delay time",
-        "wait for time seconds after page is loaded before generating the PDF") do |arg|
-        @saveDelay = Float(arg)
-      end
-
-      opts.on_tail(:NONE, "-v", "--version", "print version number") do
-        version_file = "#{File.dirname(__FILE__)}/../VERSION.yml"
-        v = YAML::load(File.open( version_file ))
-        puts "wkpdf version: #{v[:major]}.#{v[:minor]}.#{v[:patch]}\n"
-        NSApplication.sharedApplication.terminate(nil)
-      end
-
-      opts.on_tail(:NONE, "--debug", "print debug output") do
-        @debug = true
-      end
-
-      opts.on_tail(:NONE, "-h", "--help", "show help on options") do
-        puts opts
-        NSApplication.sharedApplication.terminate(nil)
-      end
-      
-      if args.empty?
-        puts "not all mandatory arguments specified\n\n"
-        puts opts
-        NSApplication.sharedApplication.terminate(nil)
-      end
-
-      opts.parse!(args)
-
+    v = YAML::load(File.open('VERSION.yml'))
+    opts = Trollop::options do
+      version "wkpdf #{v[:major]}.#{v[:minor]}.#{v[:patch]}"
+      banner "Usage: wkpdf [options]\n\n"
+      opt :output, "output PDF filename", :required => true, :default => '/dev/stdout'
+      opt :source, "URL or filename", :default => '/dev/stdin'
+      opt :paper, "paper size (#{paper_sizes.keys.join(' | ')})", :required => true, :default => 'letter'
+      opt :orientation, '(landscape | portrait)', :default => 'portrait'
+      opt :hcenter, "Center horizontally", :short => 'c', :default => true
+      opt :vcenter, "Center vertically", :default => true
+      opt :paginate, 'Enable pagination', :default => true
+      opt :margins, 'Paper margins in points (t, r, b, l) (v, h) or (all)', :default => [-1.0,-1.0,-1.0,-1.0]
+      opt :caching, 'Load from cache if possible', :default => true
+      opt :timeout, 'Set timeout to N seconds', :default => 3600.00
+      opt :stylesheet_media, 'Set the CSS media value', :default => 'screen' 
+      opt :user_stylesheet, 'URL or path of stylesheet to use', :type => :string
+      opt :user_script, 'URL or path of script to use', :type => :string
+      opt :print_background, 'display background images', :default => false
+      opt :ignore_http_errors, "generate PDF despite error", :default => false
+      opt :username, 'Authenticate with username', :type => :string
+      opt :password, 'Authenticate with password', :type => :string
+      opt :enable_plugins, 'Enable plugins', :default => false
+      opt :save_delay, "Wait for N seconds after page is loaded before generating the PDF", :default => 0.0
+      opt :version, 'Print the version and exit', :short => 'v'
+      opt :help, 'Show this message', :short => 'h'
+      opt :debug, 'print debug output', :default => false, :short => 'd'
     end
-  end
-
-# "  --caching arg     set caching policy (valid values are: yes, no) default is yes\n"
-# "  --timeout arg     set timeout in seconds, default: no timeout\n"
-
-  def CommandlineParser.usage()
-    usage = @opts
-    usage += "\n\n"
-    usage += "For further information refer to http://plessl.github.com/wkpdf"
-    return usage
-  end
-
-  def parseSourcePathOrURL(arg)
-    argAsString = NSString.stringWithUTF8String(arg)
-    path = argAsString.stringByExpandingTildeInPath
-    fm = NSFileManager.defaultManager
-    if fm.fileExistsAtPath(path) then
-      url = NSURL.fileURLWithPath(path)
-    else
-      url = NSURL.URLWithString(argAsString)
-    end
-
-    # check URL validity
-    supportedSchemes = NSArray.arrayWithObjects("http", "https", "ftp", "file", nil)
-    scheme = url.scheme
-    if scheme.nil? || (supportedSchemes.indexOfObject(scheme.lowercaseString) == NSNotFound) then
-      puts "#{argAsString} is neither a filename nor an URL with a supported scheme (http,https,ftp,file)\n"
-       NSApplication.sharedApplication.terminate(nil)
-    end
-
-    return url.absoluteString
-  end
-
-  def parseOutputPath(arg)
-    argAsString = NSString.stringWithUTF8String(arg)
-    path = argAsString.stringByExpandingTildeInPath
-    return path
-  end
-
-  def parsePaperSize(arg)
-
-    size = case arg.downcase
-      when "letter"      then NSMakeSize(612,792)
-      when "letterSmall" then NSMakeSize(612,792)
-      when "tabloid"     then NSMakeSize(792,1224)
-      when "ledger"      then NSMakeSize(1224,792)
-      when "legal"       then NSMakeSize(612,1008)
-      when "statement"   then NSMakeSize(396,612)
-      when "executive"   then NSMakeSize(540,720)
-      when "a0"          then NSMakeSize(2384,3371)
-      when "a1"          then NSMakeSize(1685,2384)
-      when "a2"          then NSMakeSize(1190,1684)
-      when "a3"          then NSMakeSize(842,1190)
-      when "a4"          then NSMakeSize(595,842)
-      when "a4small"     then NSMakeSize(595,842)
-      when "a5"          then NSMakeSize(420,595)
-      when "b4"          then NSMakeSize(729,1032)
-      when "b5"          then NSMakeSize(516,729)
-      when "folio"       then NSMakeSize(612,936)
-      when "quarto"      then NSMakeSize(610,780)
-      when "10x14"       then NSMakeSize(720,1008)
-    else
-      puts "#{arg} is not a valid paper format\n"
+    
+    @output = parseOutputPath(opts[:output])
+    @source = parseSourcePathOrURL(opts[:source])
+    @userStylesheet = opts[:user_stylesheet] ?
+      parseSourcePathOrURL(opts[:user_stylesheet]) : ''
+    @userScript = opts[:user_script] ?
+      parseSourcePathOrURL(opts[:user_script]) : ''
+    
+    @paperOrientation = opts[:orientation] == 'portrait' ?
+      NSPortraitOrientation : NSLandscapeOrientation
+    @cachingPolicy = opts[:cachingPolicy] ?
+      NSURLRequestUseProtocolCachePolicy : NSURLRequestUseProtocolCachePolicy
+    
+    opts[:paper] = opts[:paper].downcase
+    unless paper_sizes.include?(opts[:paper])
+      Trollop::die :paper, 'unrecognized paper size'
       NSApplication.sharedApplication.terminate(nil)
     end
-    return size
+    
+    @margins = opts[:margins]
+    case @margins.count
+    when 1
+      @margins = @margins * 4
+    when 2
+      @margins = [@margins[0], @margins[1]] * 2
+    end
+    
+    dimensions = paper_sizes[opts[:paper]]
+    @paperSize = NSMakeSize(dimensions[0], dimensions[1])
+    
+    [:output, :debug, :timeout, :paginate, :username, :password].each do |k|
+      instance_variable_set "@#{k}", opts[k]
+    end
+    @horizontallyCentered = opts[:hcenter]
+    @verticallyCentered = opts[:vcenter]
+    @stylesheetMedia = opts[:stylesheet_media]
+    @printBackground = opts[:print_background]
+    @ignoreHttpErrors = opts[:ignore_http_errors]
+    @enablePlugins = opts[:enable_plugins]
+    @saveDelay = opts[:save_delay]
   end
+  
+  def parseSourcePathOrURL(arg)
+      argAsString = NSString.stringWithUTF8String(arg)
+      path = argAsString.stringByExpandingTildeInPath
+      fm = NSFileManager.defaultManager
+      if fm.fileExistsAtPath(path) then
+        url = NSURL.fileURLWithPath(path)
+      else
+        url = NSURL.URLWithString(argAsString)
+      end
+
+      # check URL validity
+      supportedSchemes = NSArray.arrayWithObjects("http", "https", "ftp", "file", nil)
+      scheme = url.scheme
+      if scheme.nil? || (supportedSchemes.indexOfObject(scheme.lowercaseString) == NSNotFound) then
+        puts "#{argAsString} is neither a filename nor an URL with a supported scheme (http,https,ftp,file)\n"
+         NSApplication.sharedApplication.terminate(nil)
+      end
+
+      return url.absoluteString
+    end
+
+    def parseOutputPath(arg)
+      argAsString = NSString.stringWithUTF8String(arg)
+      path = argAsString.stringByExpandingTildeInPath
+      return path
+    end
 
 end
