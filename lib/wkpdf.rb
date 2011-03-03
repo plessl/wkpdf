@@ -28,7 +28,7 @@ NSApp.setDelegate(app_delegate)
 
 parser = CommandlineParser.instance
 #parser.parse_commandline
-parser.parse_commandline_optparse(ARGV)
+parser.parse
 
 # use 1x1 size: when pagination is turned off, the view should grow to the 
 # required size, if turned on, the view should use the page size. 
