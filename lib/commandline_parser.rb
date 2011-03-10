@@ -62,7 +62,7 @@ class CommandlineParser
       banner "Usage: wkpdf [options]\n\n"
       opt :output, "output PDF filename", :required => true, :type => :string, :short => 'o'
       opt :source, "URL or filename", :required => true, :type => :string, :short => 's'
-      opt :paper, "paper size (#{paper_sizes.keys.join(' | ')})", :required => true, :default => 'letter'
+      opt :paper, "paper size (#{paper_sizes.keys.join(' | ')})", :required => true, :default => 'A4'
       opt :orientation, "(#{orientations.keys.join(' | ')})", :default => 'portrait'
       opt :hcenter, "Center horizontally", :short => 'c', :default => true
       opt :vcenter, "Center vertically", :default => true
