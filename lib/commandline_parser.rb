@@ -91,8 +91,8 @@ class CommandlineParser
     @userScript = opts[:user_script] ?
       parseSourcePathOrURL(opts[:user_script]) : ''
     
-    unless orientations.include?(opts[:orientation])
-      Trollop::die :orientation, 'unrecognized page orientation'
+    unless orientations.keys.include?(opts[:orientation])
+      Trollop::die :orientation, "Unrecognized page orientation\nUse one of: " + orientations.keys.join(', ')
       NSApplication.sharedApplication.terminate(nil)
     end
     @paperOrientation = orientations[opts[:orientation]]
@@ -102,7 +102,7 @@ class CommandlineParser
     
     opts[:paper] = opts[:paper].downcase
     unless paper_sizes.has_key?(opts[:paper])
-      Trollop::die :paper, 'unrecognized paper size'
+      Trollop::die :paper, "unrecognized paper size\nUse one of: " + paper_sizes.keys.join(', ')
       NSApplication.sharedApplication.terminate(nil)
     end
     dimensions = paper_sizes[opts[:paper]]
@@ -112,7 +112,7 @@ class CommandlineParser
     @margins = @margins * 4 if @margins.count == 1
     @margins = [@margins[0], @margins[1]] * 2 if @margins.count == 2
     unless @margins.count == 4
-      Trollop::die :margins, 'malformed margins option'
+      Trollop::die :margins, 'Malformed margins option'
       NSApplication.sharedApplication.terminate(nil)
     end
     
