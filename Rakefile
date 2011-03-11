@@ -16,6 +16,7 @@ begin
     gemspec.email        = "wkpdf@plesslweb.ch"
     gemspec.homepage     = "http://plessl.github.com/wkpdf"
     gemspec.authors      = ["Christian Plessl"]
+	gemspec.add_dependency "trollop", ">= 1.16.2"
   end
   Jeweler::GemcutterTasks.new
 rescue LoadError

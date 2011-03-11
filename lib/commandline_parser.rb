@@ -1,6 +1,7 @@
 require 'rdoc/usage'
 require 'osx/cocoa'
 require 'yaml'
+require 'rubygems'
 require 'trollop'
 
 class CommandlineParser

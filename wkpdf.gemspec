@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Christian Plessl"]
-  s.date = %q{2011-03-02}
+  s.date = %q{2011-03-11}
   s.default_executable = %q{wkpdf}
   s.description = %q{wkpdf renders HTML to PDF using WebKit on Mac OS X. wkpdf is implemented in RubyCocoa.}
   s.email = %q{wkpdf@plesslweb.ch}
@@ -33,7 +33,6 @@ Gem::Specification.new do |s|
     "bin/wkpdf",
     "lib/commandline_parser.rb",
     "lib/controller.rb",
-    "lib/trollop.rb",
     "lib/wkpdf.rb",
     "scripts/mirror-and-convert.rb",
     "test/IdeasForTestcases.txt",
@@ -61,9 +60,12 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
+      s.add_runtime_dependency(%q<trollop>, [">= 1.16.2"])
     else
+      s.add_dependency(%q<trollop>, [">= 1.16.2"])
     end
   else
+    s.add_dependency(%q<trollop>, [">= 1.16.2"])
   end
 end
 
