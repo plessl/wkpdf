@@ -61,9 +61,9 @@ class CommandlineParser
     opts = Trollop::options do
       version "wkpdf #{v[:major]}.#{v[:minor]}.#{v[:patch]}"
       banner "Usage: wkpdf [options]\n\n"
-      opt :output, "output PDF filename", :required => true, :type => :string, :short => 'o'
+      opt :output, "Output PDF filename", :required => true, :type => :string, :short => 'o'
       opt :source, "URL or filename", :required => true, :type => :string, :short => 's'
-      opt :paper, "paper size (#{paper_sizes.keys.join(' | ')})", :required => true, :default => 'A4'
+      opt :paper, "Paper size (#{paper_sizes.keys.join(' | ')})", :default => 'a4'
       opt :orientation, "(#{orientations.keys.join(' | ')})", :default => 'portrait'
       opt :hcenter, "Center horizontally", :short => 'c', :default => true
       opt :vcenter, "Center vertically", :default => true
@@ -74,8 +74,8 @@ class CommandlineParser
       opt :stylesheet_media, 'Set the CSS media value', :default => 'screen' 
       opt :user_stylesheet, 'URL or path of stylesheet to use', :type => :string
       opt :user_script, 'URL or path of script to use', :type => :string
-      opt :print_background, 'display background images', :default => false
-      opt :ignore_http_errors, "generate PDF despite, e.g., a 404 error", :default => false
+      opt :print_background, 'Display background images', :default => false
+      opt :ignore_http_errors, "Generate PDF despite, e.g., a 404 error", :default => false
       opt :username, 'Authenticate with username', :type => :string
       opt :password, 'Authenticate with password', :type => :string
       opt :enable_plugins, 'Enable plugins', :default => false
