@@ -5,12 +5,12 @@
 
 Gem::Specification.new do |s|
   s.name = %q{wkpdf}
-  s.version = "0.3.11"
+  s.version = "0.4.0"
   s.platform = %q{universal-darwin}
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Christian Plessl"]
-  s.date = %q{2011-03-22}
+  s.date = %q{2011-03-23}
   s.default_executable = %q{wkpdf}
   s.description = %q{wkpdf renders HTML to PDF using WebKit on Mac OS X. wkpdf is implemented in RubyCocoa.}
   s.email = %q{wkpdf@plesslweb.ch}
@@ -50,7 +50,7 @@ Gem::Specification.new do |s|
   s.homepage = %q{http://plessl.github.com/wkpdf}
   s.require_paths = ["lib"]
   s.requirements = ["Mac OS X 10.5 or later", "RubyCocoa"]
-  s.rubygems_version = %q{1.5.2}
+  s.rubygems_version = %q{1.6.2}
   s.summary = %q{Render HTML to PDF using WebKit}
   s.test_files = [
     "test/rubycocoa/NSPrinterTest.rb"
