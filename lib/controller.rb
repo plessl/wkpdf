@@ -156,10 +156,10 @@ class Controller < NSObject
     viewToPrint = webView.mainFrame.frameView.documentView
     r = viewToPrint.bounds
     if p.margins.any?{|x| x > 0} then
-      r.origin.x -= p.margin[1] + p.margin[3]
-      r.origin.y -= p.margin[0] + p.margin[2]
-      r.size.width += p.margin[1] + p.margin[3]
-      r.size.height += p.margin[0] + p.margin[2]
+      r.origin.x -= p.margins[1] + p.margins[3]
+      r.origin.y -= p.margins[0] + p.margins[2]
+      r.size.width += (p.margins[1] + p.margins[3]) * 2
+      r.size.height += (p.margins[0] + p.margins[2]) * 2
     end
 
     log("Create PDF\n")

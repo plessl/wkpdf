@@ -68,7 +68,7 @@ class CommandlineParser
       opt :hcenter, "Center horizontally", :short => 'c', :default => true
       opt :vcenter, "Center vertically", :default => true
       opt :paginate, 'Enable pagination', :default => true
-      opt :margins, 'Paper margins in points (T R B L) (V H) or (M)', :short => 'm', :default => [-1.0,-1.0,-1.0,-1.0]
+      opt :margins, 'Paper margins in points (T R B L) (V H) or (M)', :short => 'm', :default => [0,0,0,0]
       opt :caching, 'Load from cache if possible', :default => true
       opt :timeout, 'Set timeout to N seconds', :default => 3600.00
       opt :stylesheet_media, 'Set the CSS media value', :default => 'screen' 
