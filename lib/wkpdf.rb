@@ -83,6 +83,7 @@ module WKPDF
     webPrefs.setJavaScriptEnabled(true)
     webPrefs.setJavaScriptCanOpenWindowsAutomatically(false)
     webPrefs.setShouldPrintBackgrounds(parser.printBackground)
+    webPrefs.setUserStyleSheetEnabled(false)
 
     if parser.userStylesheet != "" then
       webPrefs.setUserStyleSheetEnabled(true)
