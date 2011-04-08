@@ -8,6 +8,20 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="Description" content="wkpdf is a command line utility for converting HTML to PDF on Mac OS X. By relying on the feature-rich WebKit rendering engine wkpdf allows for styling the HTML source with the latest CSS2/3 standards to produce a high-quality PDF document.">
   <link rel="stylesheet" href="style.css" type="text/css" />
+
+  <script type="text/javascript">
+     var _gaq = _gaq || [];
+     _gaq.push(['_setAccount', 'UA-307882-7']);
+     _gaq.push(['_gat._anonymizeIp']);
+     _gaq.push(['_trackPageview']);
+
+     (function() {
+       var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+       ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+     })();
+  </script>
+
 </head>
 
 <body>
@@ -104,12 +118,12 @@ wkpdf --help
 <p>The following example renders the apple.com website to a PDF document in A5 format in landscape orientation:
 
 <pre>
-wkpdf --source http://www.webkit.org --format A5 --landscape \
+wkpdf --source http://www.webkit.org --paper A5 --orientation landscape \
       --output webkit.pdf
 </pre>
 </p>
 
-<p>Many websites provide specific CSS stylesheets for printing, which suppress superflous graphical elements in order to generate tidy printouts. If you want to render a website with all the graphical icing to exactly match the view in a browser, you can explicitly force the use of the CSS screen stylesheet and enable the printing of background images as in the following example:
+<p>Many websites provide specific CSS stylesheets for printing, which suppress superfluous graphical elements in order to generate tidy printouts. If you want to render a website with all the graphical icing to exactly match the view in a browser, you can explicitly force the use of the CSS screen stylesheet and enable the printing of background images as in the following example:
 
 <pre>
 wkpdf --source http://www.slashdot.org --stylesheet-media screen \
@@ -152,7 +166,7 @@ Please use the <a href="http://github.com/plessl/wkpdf/issues">issue tracker</a>
 <p>wkpdf is available under the terms of the MIT license:</p>
 
 
-<p>  Copyright (c) 2007-09 Christian Plessl
+<p>  Copyright (c) 2007-11 Christian Plessl
 </p>
 
 <p>  Permission is hereby granted, free of charge, to any person

@@ -16,6 +16,26 @@ p {
   line-height: 140%;
 }
 
+#nav {
+  background-color: #036;
+}
+
+#nav ul {
+  text-align: center;
+}
+
+#nav li {
+  display: inline;
+  border: 1px solid;
+  padding: 5px;
+}
+
+#nav li a {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+}
+
 #sidebar {
   margin-top:; 20px;
   padding-top: 20px;
