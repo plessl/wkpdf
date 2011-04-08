@@ -60,9 +60,9 @@ class CommandlineParser
     v = YAML::load_file(File.join(File.dirname(__FILE__), '../VERSION.yml'))
     opts = Trollop::options do
       version "wkpdf #{v[:major]}.#{v[:minor]}.#{v[:patch]}"
-      banner "Usage: wkpdf [options]\n\n"
+      banner "Usage: wkpdf [options]"
       opt :output, "Output PDF filename", :required => true, :type => :string, :short => 'o'
-      opt :source, "URL or filename", :required => true, :type => :string, :short => 's'
+      opt :source, "URL or filename (supported protocols: http, https, ftp, file)", :required => true, :type => :string, :short => 's'
       opt :paper, "Paper size (#{paper_sizes.keys.join(' | ')})", :default => 'a4'
       opt :orientation, "(#{orientations.keys.join(' | ')})", :default => 'portrait'
       opt :hcenter, "Center horizontally", :short => 'c', :default => true
@@ -83,6 +83,9 @@ class CommandlineParser
       opt :version, 'Print the version and exit', :short => 'v'
       opt :help, 'Show this message', :short => 'h'
       opt :debug, 'Print debug output', :default => false, :short => 'd'
+      banner ""
+      banner "Further information: http://plessl.github.com/wkpdf"
+      banner ""
     end
     
     @output = parseOutputPath(opts[:output])
