@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{wkpdf}
-  s.version = "0.4.1"
+  s.version = "0.4.2"
   s.platform = %q{universal-darwin}
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
@@ -22,6 +22,8 @@ Gem::Specification.new do |s|
   s.files = [
     "CONTRIBUTORS",
     "FAQ",
+    "Gemfile",
+    "Gemfile.lock",
     "HOW_TO_RELEASE.txt",
     "LICENSE",
     "README.md",
@@ -48,6 +50,7 @@ Gem::Specification.new do |s|
     "wkpdf.gemspec"
   ]
   s.homepage = %q{http://plessl.github.com/wkpdf}
+  s.licenses = ["MIT"]
   s.require_paths = ["lib"]
   s.requirements = ["Mac OS X 10.5 or later", "RubyCocoa"]
   s.rubygems_version = %q{1.6.2}
@@ -60,11 +63,17 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
+      s.add_development_dependency(%q<bundler>, ["~> 1.0.0"])
+      s.add_development_dependency(%q<jeweler>, ["~> 1.5.2"])
       s.add_runtime_dependency(%q<trollop>, [">= 1.16.2"])
     else
+      s.add_dependency(%q<bundler>, ["~> 1.0.0"])
+      s.add_dependency(%q<jeweler>, ["~> 1.5.2"])
       s.add_dependency(%q<trollop>, [">= 1.16.2"])
     end
   else
+    s.add_dependency(%q<bundler>, ["~> 1.0.0"])
+    s.add_dependency(%q<jeweler>, ["~> 1.5.2"])
     s.add_dependency(%q<trollop>, [">= 1.16.2"])
   end
 end
