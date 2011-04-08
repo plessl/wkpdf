@@ -1,2 +1,6 @@
+# jeweler generated
 pkg
-doc
+
+.DS_Store
+*.tmproj
+tmtags

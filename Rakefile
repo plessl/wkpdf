@@ -1,25 +1,34 @@
 require 'rubygems'
+require 'bundler'
+begin
+  Bundler.setup(:default, :development)
+rescue Bundler::BundlerError => e
+  $stderr.puts e.message
+  $stderr.puts "Run `bundle install` to install missing gems"
+  exit e.status_code
+end
 require 'rake'
 
 Dir["#{File.dirname(__FILE__)}/tasks/*.rake"].sort.each { |ext| load ext }
 
-begin
-  require 'jeweler'
-  Jeweler::Tasks.new do |gemspec|
-    gemspec.name         = "wkpdf"
-    gemspec.summary      = "Render HTML to PDF using WebKit"
-    gemspec.description  = "wkpdf renders HTML to PDF using WebKit on Mac OS X. wkpdf is "
-    gemspec.description  += "implemented in RubyCocoa."
-    gemspec.platform     = "universal-darwin"
-    gemspec.requirements << "Mac OS X 10.5 or later"
-    gemspec.requirements << "RubyCocoa"
-    gemspec.email        = "wkpdf@plesslweb.ch"
-    gemspec.homepage     = "http://plessl.github.com/wkpdf"
-    gemspec.authors      = ["Christian Plessl"]
-	gemspec.add_dependency "trollop", ">= 1.16.2"
-  end
-  Jeweler::GemcutterTasks.new
-rescue LoadError
-  puts "Jeweler (or a dependency) not available. Install it with: sudo gem install jeweler"
+require 'jeweler'
+Jeweler::Tasks.new do |gemspec|
+  gemspec.name         = "wkpdf"
+  gemspec.summary      = "Render HTML to PDF using WebKit"
+  gemspec.description  = "wkpdf renders HTML to PDF using WebKit on Mac OS X. wkpdf is "
+  gemspec.description  += "implemented in RubyCocoa."
+  gemspec.license      = "MIT"
+  gemspec.platform     = "universal-darwin"
+  gemspec.requirements << "Mac OS X 10.5 or later"
+  gemspec.requirements << "RubyCocoa"
+  gemspec.email        = "wkpdf@plesslweb.ch"
+  gemspec.homepage     = "http://plessl.github.com/wkpdf"
+  gemspec.authors      = ["Christian Plessl"]
+  gemspec.add_runtime_dependency "trollop", ">= 1.16.2"
+  # Include your dependencies below. Runtime dependencies are required when using your gem,
+  # and development dependencies are only needed for development (ie running rake tasks, tests, etc)
+  #  gem.add_runtime_dependency 'jabber4r', '> 0.1'
+  #  gem.add_development_dependency 'rspec', '> 1.2.3'
 end
+Jeweler::RubygemsDotOrgTasks.new
 

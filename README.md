@@ -18,7 +18,7 @@ For questions regarding wkpdf contact: wkpdf@plesslweb.ch
 License
 =======
 
-Copyright (c) 2007-09 Christian Plessl
+Copyright (c) 2007-11 Christian Plessl
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
