@@ -135,11 +135,11 @@ class Controller < NSObject
     printInfo.setHorizontallyCentered(p.horizontallyCentered)
     printInfo.setOrientation(p.paperOrientation)
     printInfo.setPaperSize(p.paperSize)
-
-    printInfo.setTopMargin(p.margins[0]) if p.margins[0]
-    printInfo.setRightMargin(p.margins[1]) if p.margins[1]
-    printInfo.setBottomMargin(p.margins[2]) if p.margins[2]
-    printInfo.setLeftMargin(p.margins[3]) if p.margins[3]
+    
+    printInfo.setTopMargin(p.margins[0]) if p.margins[0] != :auto
+    printInfo.setRightMargin(p.margins[1]) if p.margins[1] != :auto
+    printInfo.setBottomMargin(p.margins[2]) if p.margins[2] != :auto
+    printInfo.setLeftMargin(p.margins[3]) if p.margins[3] != :auto
 
     viewToPrint = webView.mainFrame.frameView.documentView
     printOp = NSPrintOperation.printOperationWithView_printInfo(viewToPrint,printInfo)
@@ -155,11 +155,11 @@ class Controller < NSObject
     p = CommandlineParser.instance
     viewToPrint = webView.mainFrame.frameView.documentView
     r = viewToPrint.bounds
-    if p.margins.any?{|x| x > 0} then
-      r.origin.x -= p.margins[1] + p.margins[3]
-      r.origin.y -= p.margins[0] + p.margins[2]
-      r.size.width += (p.margins[1] + p.margins[3]) * 2
-      r.size.height += (p.margins[0] + p.margins[2]) * 2
+    if p.margins.any?{|x| x != :auto } then
+      r.origin.x -= p.margins[1]
+      r.origin.y -= p.margins[0]
+      r.size.width += (p.margins[1] + p.margins[3]) 
+      r.size.height += (p.margins[0] + p.margins[2]) 
     end
 
     log("Create PDF\n")
