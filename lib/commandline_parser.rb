@@ -52,7 +52,8 @@ class CommandlineParser
       "b5"          => [516,729],
       "folio"       => [612,936],
       "quarto"      => [610,780],
-      "10x14"       => [720,1008]
+      "10x14"       => [720,1008],
+      "custom:WxH"  => ["INVALID", "INVALID"]
     }
     orientations = {
       'landscape' => NSLandscapeOrientation,
@@ -69,7 +70,7 @@ class CommandlineParser
       opt :hcenter, "Center horizontally", :short => 'c', :default => true
       opt :vcenter, "Center vertically", :default => true
       opt :paginate, 'Enable pagination', :default => true
-      opt :margins, 'Paper margins in points (T R B L) (V H) or (M)', :short => 'm', :default => [0,0,0,0]
+      opt :margins, 'Paper margins in points (T R B L) (V H) or (M)', :short => 'm', :type => :integers
       opt :caching, 'Load from cache if possible', :default => true
       opt :timeout, 'Set timeout to N seconds', :default => 3600.00
       opt :stylesheet_media, 'Set the CSS media value', :default => 'screen' 
@@ -107,6 +108,8 @@ class CommandlineParser
       NSURLRequestUseProtocolCachePolicy : NSURLRequestUseProtocolCachePolicy
     
     opts[:paper] = opts[:paper].downcase
+    paper_sizes[opts[:paper]] = [ $~[1], $~[2] ] if opts[:paper] =~ /custom:(\d+)x(\d+)/
+      
     unless paper_sizes.has_key?(opts[:paper])
       Trollop::die :paper, "unrecognized paper size\nUse one of: " + paper_sizes.keys.join(', ')
       NSApplication.sharedApplication.terminate(nil)
@@ -114,7 +117,7 @@ class CommandlineParser
     dimensions = paper_sizes[opts[:paper]]
     @paperSize = NSMakeSize(dimensions[0], dimensions[1])
     
-    @margins = opts[:margins]
+    @margins = opts[:margins] || [:auto, :auto, :auto, :auto]
     @margins = @margins * 4 if @margins.count == 1
     @margins = [@margins[0], @margins[1]] * 2 if @margins.count == 2
     unless @margins.count == 4
