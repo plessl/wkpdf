@@ -25,6 +25,7 @@ class CommandlineParser
   attr_accessor :timeout                  # NSTimeInterval (float, seconds?)
   attr_accessor :saveDelay                # NSTimeInterval (float, seconds?)
   attr_accessor :enablePlugins            # boolean
+  attr_accessor :enableJavascript         # boolean
   attr_accessor :ignoreHttpErrors         # boolean
   attr_accessor :username                 # String
   attr_accessor :password                 # String
@@ -79,6 +80,7 @@ class CommandlineParser
       opt :username, 'Authenticate with username', :type => :string
       opt :password, 'Authenticate with password', :type => :string
       opt :enable_plugins, 'Enable plugins', :default => false
+      opt :enable_javascript, 'Enable javascript', :default => true
       opt :save_delay, "Wait N seconds after loading to generate PDF", :default => 0.0
       opt :version, 'Print the version and exit', :short => 'v'
       opt :help, 'Show this message', :short => 'h'
@@ -129,6 +131,7 @@ class CommandlineParser
     @printBackground = opts[:print_background]
     @ignoreHttpErrors = opts[:ignore_http_errors]
     @enablePlugins = opts[:enable_plugins]
+    @enableJavascript = opts[:enable_javascript]
     @saveDelay = opts[:save_delay]
   end
   

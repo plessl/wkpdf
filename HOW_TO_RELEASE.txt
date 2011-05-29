@@ -12,4 +12,3 @@ rake version:bump:patch
 
 # Release the gem (upload to github and tag)
 rake release
-rake rubygems:release

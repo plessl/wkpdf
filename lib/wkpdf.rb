@@ -80,7 +80,7 @@ module WKPDF
     webPrefs.setAllowsAnimatedImageLooping(false)
     webPrefs.setJavaEnabled(false)
     webPrefs.setPlugInsEnabled(parser.enablePlugins)
-    webPrefs.setJavaScriptEnabled(true)
+    webPrefs.setJavaScriptEnabled(parser.enableJavascript)
     webPrefs.setJavaScriptCanOpenWindowsAutomatically(false)
     webPrefs.setShouldPrintBackgrounds(parser.printBackground)
     webPrefs.setUserStyleSheetEnabled(false)
