@@ -69,7 +69,8 @@ class CommandlineParser
       opt :orientation, "(#{orientations.keys.join(' | ')})", :default => 'portrait'
       opt :hcenter, "Center horizontally", :short => 'c', :default => true
       opt :vcenter, "Center vertically", :default => true
-      opt :paginate, 'Enable pagination', :default => true
+      # set pagination default to false, as long as this functionality is broken in OS X 10.7
+      opt :paginate, 'Enable pagination', :default => false
       opt :margins, 'Paper margins in points (T R B L) (V H) or (M)', :short => 'm', :type => :integers
       opt :caching, 'Load from cache if possible', :default => true
       opt :timeout, 'Set timeout to N seconds', :default => 3600.00

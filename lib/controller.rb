@@ -122,7 +122,7 @@ class Controller < NSObject
     p = CommandlineParser.instance
 
     sharedInfo = NSPrintInfo.sharedPrintInfo
-    sharedDict = sharedInfo. dictionary
+    sharedDict = sharedInfo.dictionary
     printInfoDict = NSMutableDictionary.dictionaryWithDictionary(sharedDict)
 
     printInfoDict.setObject_forKey(NSPrintSaveJob,NSPrintJobDisposition)
