@@ -1,4 +1,5 @@
 require 'rubygems'
+require 'rake/dsl_definition'
 require 'bundler'
 begin
   Bundler.setup(:default, :development)
@@ -14,6 +15,7 @@ Dir["#{File.dirname(__FILE__)}/tasks/*.rake"].sort.each { |ext| load ext }
 require 'jeweler'
 Jeweler::Tasks.new do |gemspec|
   gemspec.name         = "wkpdf"
+  gemspec.executable   = ['wkpdf']
   gemspec.summary      = "Render HTML to PDF using WebKit"
   gemspec.description  = "wkpdf renders HTML to PDF using WebKit on Mac OS X. wkpdf is "
   gemspec.description  += "implemented in RubyCocoa."
