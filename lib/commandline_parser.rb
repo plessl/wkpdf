@@ -105,8 +105,8 @@ class CommandlineParser
     end
     @paperOrientation = orientations[opts[:orientation]]
     
-    @cachingPolicy = opts[:cachingPolicy] ?
-      NSURLRequestUseProtocolCachePolicy : NSURLRequestUseProtocolCachePolicy
+    @cachingPolicy = opts[:caching] ?
+      NSURLRequestUseProtocolCachePolicy : NSURLRequestReloadIgnoringLocalAndRemoteCacheData
     
     opts[:paper] = opts[:paper].downcase
     paper_sizes[opts[:paper]] = [ $~[1], $~[2] ] if opts[:paper] =~ /custom:(\d+)x(\d+)/
