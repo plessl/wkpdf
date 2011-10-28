@@ -1,5 +1,4 @@
 require 'rubygems'
-require 'rake/dsl_definition'
 require 'bundler'
 begin
   Bundler.setup(:default, :development)
