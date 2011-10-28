@@ -4,3 +4,5 @@ pkg
 .DS_Store
 *.tmproj
 tmtags
+*.pdf
+run_it.sh
