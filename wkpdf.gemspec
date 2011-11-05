@@ -5,16 +5,16 @@
 
 Gem::Specification.new do |s|
   s.name = %q{wkpdf}
-  s.version = "0.5.3"
+  s.version = "0.6.0"
   s.platform = %q{universal-darwin}
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Christian Plessl"]
-  s.date = %q{2011-10-28}
-  s.default_executable = ["wkpdf"]
+  s.date = %q{2011-11-05}
+  s.default_executable = %q{wkpdf}
   s.description = %q{wkpdf renders HTML to PDF using WebKit on Mac OS X. wkpdf is implemented in RubyCocoa.}
   s.email = %q{wkpdf@plesslweb.ch}
-  s.executables = [["wkpdf"]]
+  s.executables = ["wkpdf"]
   s.extra_rdoc_files = [
     "LICENSE",
     "README.md"
