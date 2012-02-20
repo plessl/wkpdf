@@ -68,7 +68,7 @@ class CommandlineParser
       opt :paper, "Paper size (#{paper_sizes.keys.join(' | ')})", :default => 'a4'
       opt :orientation, "(#{orientations.keys.join(' | ')})", :default => 'portrait'
       opt :hcenter, "Center horizontally", :short => 'c', :default => true
-      opt :vcenter, "Center vertically", :default => true
+      opt :vcenter, "Center vertically", :default => false
       opt :paginate, 'Enable pagination', :default => true
       opt :margins, 'Paper margins in points (T R B L) (V H) or (M)', :short => 'm', :type => :integers
       opt :caching, 'Load from cache if possible', :default => true
@@ -120,6 +120,7 @@ class CommandlineParser
     @margins = opts[:margins] || [:auto, :auto, :auto, :auto]
     @margins = @margins * 4 if @margins.count == 1
     @margins = [@margins[0], @margins[1]] * 2 if @margins.count == 2
+
     unless @margins.count == 4
       Trollop::die :margins, 'Malformed margins option'
       NSApplication.sharedApplication.terminate(nil)
