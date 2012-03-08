@@ -64,7 +64,7 @@ class CommandlineParser
       version "wkpdf #{v[:major]}.#{v[:minor]}.#{v[:patch]}"
       banner "Usage: wkpdf [options]"
       opt :output, "Output PDF filename", :required => true, :type => :string, :short => 'o'
-      opt :source, "URL or filename (supported protocols: http, https, ftp, file)", :required => true, :type => :string, :short => 's'
+      opt :source, "URL or filename (supported protocols: http, https, ftp, file), if not present read from stdin", :required => false, :type => :string, :short => 's', :default => '/dev/stdin'
       opt :paper, "Paper size (#{paper_sizes.keys.join(' | ')})", :default => 'a4'
       opt :orientation, "(#{orientations.keys.join(' | ')})", :default => 'portrait'
       opt :hcenter, "Center horizontally", :short => 'c', :default => true
