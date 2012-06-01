@@ -118,10 +118,10 @@ class CommandlineParser
     @paperSize = NSMakeSize(dimensions[0], dimensions[1])
     
     @margins = opts[:margins] || [:auto, :auto, :auto, :auto]
-    @margins = @margins * 4 if @margins.count == 1
-    @margins = [@margins[0], @margins[1]] * 2 if @margins.count == 2
+    @margins = @margins * 4 if @margins.length == 1
+    @margins = [@margins[0], @margins[1]] * 2 if @margins.length == 2
 
-    unless @margins.count == 4
+    unless @margins.length == 4
       Trollop::die :margins, 'Malformed margins option'
       NSApplication.sharedApplication.terminate(nil)
     end
