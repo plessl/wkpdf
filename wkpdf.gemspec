@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{wkpdf}
-  s.version = "0.6.5"
+  s.version = "0.6.6"
   s.platform = %q{universal-darwin}
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
