@@ -10,7 +10,7 @@ class CommandlineParser
   include Singleton
 
   attr_accessor :source                   # NSURL
-  attr_accessor :output                   # String
+  attr_accessor :output                   # NSURL
   attr_accessor :paperSize                # NSSize
   attr_accessor :paginate                 # boolean
   attr_accessor :margins                  # [float, float, float, float]
@@ -63,7 +63,7 @@ class CommandlineParser
     opts = Trollop::options do
       version "wkpdf #{v[:major]}.#{v[:minor]}.#{v[:patch]}"
       banner "Usage: wkpdf [options]"
-      opt :output, "Output PDF filename", :required => true, :type => :string, :short => 'o'
+      opt :output, "Output PDF filename (POSIX path or file:/// URL)", :required => true, :type => :string, :short => 'o'
       opt :source, "URL or filename (supported protocols: http, https, ftp, file), if not present read from stdin", :required => false, :type => :string, :short => 's', :default => '/dev/stdin'
       opt :paper, "Paper size (#{paper_sizes.keys.join(' | ')})", :default => 'a4'
       opt :orientation, "(#{orientations.keys.join(' | ')})", :default => 'portrait'
@@ -93,6 +93,7 @@ class CommandlineParser
     
     @output = parseOutputPath(opts[:output])
     @source = parseSourcePathOrURL(opts[:source])
+    puts "source.inspect = #{source.inspect}"
     @userStylesheet = opts[:user_stylesheet] ?
       parseSourcePathOrURL(opts[:user_stylesheet]) : ''
     @userScript = opts[:user_script] ?
@@ -126,7 +127,7 @@ class CommandlineParser
       NSApplication.sharedApplication.terminate(nil)
     end
     
-    [:output, :debug, :timeout, :paginate, :username, :password].each do |k|
+    [:debug, :timeout, :paginate, :username, :password].each do |k|
       instance_variable_set "@#{k}", opts[k]
     end
     @horizontallyCentered = opts[:hcenter]
@@ -157,13 +158,19 @@ class CommandlineParser
          NSApplication.sharedApplication.terminate(nil)
       end
 
-      return url.absoluteString
+      return url
     end
 
     def parseOutputPath(arg)
-      argAsString = NSString.stringWithUTF8String(arg)
-      path = argAsString.stringByExpandingTildeInPath
-      return path
+      if arg.match("file://") then
+        argAsString = NSString.stringWithUTF8String(arg)
+        url = NSURL.URLWithString(argAsString)
+      else
+        absolute_path = File.expand_path(arg)
+        absolutePathAsString = NSString.stringWithUTF8String(absolute_path)
+        url = NSURL.fileURLWithPath_isDirectory(absolutePathAsString,false)
+      end
+      return url
     end
 
 end

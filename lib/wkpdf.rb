@@ -83,10 +83,8 @@ module WKPDF
     pool = ::NSAutoreleasePool.alloc.init
 
     puts "wkpdf started\n" if parser.debug
-
-    theURL = ::NSURL.URLWithString(parser.source)
     request = ::NSURLRequest.requestWithURL_cachePolicy_timeoutInterval(
-    theURL, parser.cachingPolicy, parser.timeout) 
+    parser.source, parser.cachingPolicy, parser.timeout)
 
     # TODO: detect timeout and terminate if timeout occured
 
