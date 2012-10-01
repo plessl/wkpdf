@@ -92,7 +92,6 @@ class CommandlineParser
     end
     
     @output = parseOutputPath(opts[:output])
-    puts "output = #{output}"
     @source = parseSourcePathOrURL(opts[:source])
     @userStylesheet = opts[:user_stylesheet] ?
       parseSourcePathOrURL(opts[:user_stylesheet]) : ''

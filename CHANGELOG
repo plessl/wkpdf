@@ -1,3 +1,7 @@
+0.6.8
+ - allow for suppressing more error messages with --ignore-http-errors
+0.6.7
+ - reverted pointless changes from 0.6.5
 0.6.6
  - remove debug message
 0.6.5
