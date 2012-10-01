@@ -11,7 +11,7 @@ class Controller < NSObject
     @resourceCount = 0
     @saveTimer = nil
     @webView = webview
-    log("initialied Controller\n")
+    log("initialized Controller\n")
     self
   end
 
@@ -50,13 +50,13 @@ class Controller < NSObject
   # indicates errors for a partially loaded page
   def webView_didFailLoadWithError_forFrame(sender,error,frame)
     log("webView #{sender} didFailLoadWithError: #{error.localizedDescription}, Frame: #{frame}\n")
-    NSApplication.sharedApplication.terminate(nil)
+    NSApplication.sharedApplication.terminate(nil) unless CommandlineParser.instance.ignoreHttpErrors
   end
 
   # indicates errors for initially loading a page
   def webView_didFailProvisionalLoadWithError_forFrame(sender,error,frame)
     log("webView #{sender} didFailProvisionalLoadWithError \"#{error.localizedDescription}\", Frame: #{frame}")
-    NSApplication.sharedApplication.terminate(nil)
+    NSApplication.sharedApplication.terminate(nil) unless CommandlineParser.instance.ignoreHttpErrors
   end
 
   # accessing a password protected resource
@@ -77,7 +77,7 @@ class Controller < NSObject
   def webView_resource_didFailLoadingWithError_fromDataSource(sender,identifier,error,dataSource)
     log("didFailLoadingWithError identifier: #{identifier} error: #{error.localizedDescription} dataSource: #{dataSource}\n")
     p = CommandlineParser.instance
-    if p.ignoreHttpErrors then
+    unless p.ignoreHttpErrors then
       puts "Could not load resource #{identifier}, error: #{error.localizedDescription}\n"
       NSApplication.sharedApplication.terminate(nil)
     end
@@ -87,8 +87,8 @@ class Controller < NSObject
   def webView_plugInFailedWithError_dataSource(sender,error,dataSource)
     puts "plugInFailedWithError error: #{error.localizedDescription} dataSource: #{dataSource}\n"
     p = CommandlineParser.instance
-    if p.ignoreHttpErrors then
-      puts "Cound not load plugin, error: #{error.localizedDescription}\n"
+    unless p.ignoreHttpErrors then
+      puts "Could not load plugin, error: #{error.localizedDescription}\n"
       NSApplication.sharedApplication.terminate(nil)
     end
   end
