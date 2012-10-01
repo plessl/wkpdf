@@ -63,7 +63,7 @@ class CommandlineParser
     opts = Trollop::options do
       version "wkpdf #{v[:major]}.#{v[:minor]}.#{v[:patch]}"
       banner "Usage: wkpdf [options]"
-      opt :output, "Output PDF filename (POSIX path or file:/// URL)", :required => true, :type => :string, :short => 'o'
+      opt :output, "Output PDF filename", :required => true, :type => :string, :short => 'o'
       opt :source, "URL or filename (supported protocols: http, https, ftp, file), if not present read from stdin", :required => false, :type => :string, :short => 's', :default => '/dev/stdin'
       opt :paper, "Paper size (#{paper_sizes.keys.join(' | ')})", :default => 'a4'
       opt :orientation, "(#{orientations.keys.join(' | ')})", :default => 'portrait'
@@ -92,6 +92,7 @@ class CommandlineParser
     end
     
     @output = parseOutputPath(opts[:output])
+    puts "output = #{output}"
     @source = parseSourcePathOrURL(opts[:source])
     @userStylesheet = opts[:user_stylesheet] ?
       parseSourcePathOrURL(opts[:user_stylesheet]) : ''
@@ -140,36 +141,29 @@ class CommandlineParser
   end
   
   def parseSourcePathOrURL(arg)
-      argAsString = NSString.stringWithUTF8String(arg)
-      path = argAsString.stringByExpandingTildeInPath
-      fm = NSFileManager.defaultManager
-      if fm.fileExistsAtPath(path) then
-        url = NSURL.fileURLWithPath(path)
-      else
-        url = NSURL.URLWithString(argAsString)
-      end
-
-      # check URL validity
-      supportedSchemes = NSArray.arrayWithObjects("http", "https", "ftp", "file", nil)
-      scheme = url.scheme
-      if scheme.nil? || (supportedSchemes.indexOfObject(scheme.lowercaseString) == NSNotFound) then
-        puts "#{argAsString} is neither a filename nor an URL with a supported scheme (http,https,ftp,file)\n"
-         NSApplication.sharedApplication.terminate(nil)
-      end
-
-      return url
+    argAsString = NSString.stringWithUTF8String(arg)
+    path = argAsString.stringByExpandingTildeInPath
+    fm = NSFileManager.defaultManager
+    if fm.fileExistsAtPath(path) then
+      url = NSURL.fileURLWithPath(path)
+    else
+      url = NSURL.URLWithString(argAsString)
     end
 
-    def parseOutputPath(arg)
-      if arg.match("file://") then
-        argAsString = NSString.stringWithUTF8String(arg)
-        url = NSURL.URLWithString(argAsString)
-      else
-        absolute_path = File.expand_path(arg)
-        absolutePathAsString = NSString.stringWithUTF8String(absolute_path)
-        url = NSURL.fileURLWithPath_isDirectory(absolutePathAsString,false)
-      end
-      return url
+    # check URL validity
+    supportedSchemes = NSArray.arrayWithObjects("http", "https", "ftp", "file", nil)
+    scheme = url.scheme
+    if scheme.nil? || (supportedSchemes.indexOfObject(scheme.lowercaseString) == NSNotFound) then
+      puts "#{argAsString} is neither a filename nor an URL with a supported scheme (http,https,ftp,file)\n"
+       NSApplication.sharedApplication.terminate(nil)
     end
+
+    return url
+  end
+
+  def parseOutputPath(arg)
+    absolute_path = File.expand_path(arg)
+    return NSString.stringWithUTF8String(absolute_path)
+  end
 
 end
