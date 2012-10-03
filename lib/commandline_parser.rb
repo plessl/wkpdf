@@ -35,7 +35,7 @@ class CommandlineParser
 
     paper_sizes = {
       "letter"      => [612,792],
-      "letterSmall" => [612,792],
+      "lettersmall" => [612,792],
       "tabloid"     => [792,1224],
       "ledger"      => [1224,792],
       "legal"       => [612,1008],
@@ -87,6 +87,7 @@ class CommandlineParser
       opt :help, 'Show this message', :short => 'h'
       opt :debug, 'Print debug output', :default => false, :short => 'd'
       banner ""
+      banner "Margins and custom paper sizes are measured in points (72 points = 1 inch.)"
       banner "Further information: http://plessl.github.com/wkpdf"
       banner ""
     end
