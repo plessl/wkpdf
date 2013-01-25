@@ -65,7 +65,7 @@ module WKPDF
 
     if parser.userStylesheet != "" then
       webPrefs.setUserStyleSheetEnabled(true)
-      webPrefs.setUserStyleSheetLocation(NSURL.URLWithString(parser.userStylesheet))
+      webPrefs.setUserStyleSheetLocation(parser.userStylesheet)
       puts "setting user style sheet to #{parser.userStylesheet}\n" if parser.debug
     end
 

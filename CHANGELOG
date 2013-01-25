@@ -1,3 +1,7 @@
+0.6.10
+ - fix user stylesheet support.
+0.6.9
+ - fix parsing of lettersmall paper size.
 0.6.8
  - allow for suppressing more error messages with --ignore-http-errors
 0.6.7
