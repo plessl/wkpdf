@@ -1,3 +1,5 @@
+0.6.11
+ - fix user script support (thanks to tiojoca for reporting the bug)
 0.6.10
  - fix user stylesheet support.
 0.6.9

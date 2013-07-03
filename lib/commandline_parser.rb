@@ -15,8 +15,8 @@ class CommandlineParser
   attr_accessor :paginate                 # boolean
   attr_accessor :margins                  # [float, float, float, float]
   attr_accessor :stylesheetMedia          # String
-  attr_accessor :userStylesheet           # String
-  attr_accessor :userScript               # String
+  attr_accessor :userStylesheet           # NSURL
+  attr_accessor :userScript               # NSURL
   attr_accessor :printBackground          # boolean
   attr_accessor :paperOrientation         # NSPrintingOrientation
   attr_accessor :horizontallyCentered     # boolean

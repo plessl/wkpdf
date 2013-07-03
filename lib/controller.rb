@@ -25,7 +25,7 @@ class Controller < NSObject
     end
 
     if p.userScript != "" then
-      self.loadUserScript(sender,p.userScript)
+      self.loadUserScript(sender)
     end
 
     if p.saveDelay <= 0 then
@@ -181,10 +181,9 @@ class Controller < NSObject
     NSApplication.sharedApplication.terminate(nil)
   end
 
-  def loadUserScript(sender,location)
+  def loadUserScript(sender)
     p = CommandlineParser.instance
-    theURL = NSURL.URLWithString(location)
-    urlRequest = NSURLRequest.requestWithURL_cachePolicy_timeoutInterval(theURL, p.cachingPolicy, p.timeout) 
+    urlRequest = NSURLRequest.requestWithURL_cachePolicy_timeoutInterval(p.userScript, p.cachingPolicy, p.timeout) 
     data, resp, error = NSURLConnection.sendSynchronousRequest_returningResponse_error(urlRequest)
     if error.nil? then
       js = NSString.alloc.initWithData_encoding(data, NSUTF8StringEncoding)
