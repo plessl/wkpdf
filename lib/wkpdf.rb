@@ -47,7 +47,7 @@ module WKPDF
     
     # Parenting webView with a window fixes issue #19
     window = ::NSWindow.alloc.initWithContentRect_styleMask_backing_defer(
-            NSMakeRect(0,0,1,1),
+            NSMakeRect(0,0,parser.screenWidth.to_i(),1),
             NSBorderlessWindowMask,
             NSBackingStoreNonretained, false)
     window.setContentView(webView)
