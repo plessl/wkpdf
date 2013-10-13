@@ -27,6 +27,7 @@ class CommandlineParser
   attr_accessor :enablePlugins            # boolean
   attr_accessor :enableJavascript         # boolean
   attr_accessor :ignoreHttpErrors         # boolean
+  attr_accessor :screenWidth              # integer
   attr_accessor :username                 # String
   attr_accessor :password                 # String
   attr_accessor :debug                    # boolean
@@ -83,6 +84,7 @@ class CommandlineParser
       opt :enable_plugins, 'Enable plugins', :default => false
       opt :enable_javascript, 'Enable javascript', :default => true
       opt :save_delay, "Wait N seconds after loading to generate PDF", :default => 0.0
+      opt :screen_width, "Screen width for responsive design", :default => 1
       opt :version, 'Print the version and exit', :short => 'v'
       opt :help, 'Show this message', :short => 'h'
       opt :debug, 'Print debug output', :default => false, :short => 'd'
@@ -138,6 +140,7 @@ class CommandlineParser
     @enablePlugins = opts[:enable_plugins]
     @enableJavascript = opts[:enable_javascript]
     @saveDelay = opts[:save_delay]
+    @screenWidth = opts[:screen_width]
   end
   
   def parseSourcePathOrURL(arg)
