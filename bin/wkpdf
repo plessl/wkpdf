@@ -1,5 +1,19 @@
 #!/usr/bin/ruby
-$LOAD_PATH.unshift File.join(File.dirname(__FILE__), '..', 'lib')
 
-require 'wkpdf'
-exit WKPDF::main()
+OSVER=`sw_vers -productVersion`.chomp
+
+(major, minor, patch) = OSVER.split('.')
+
+patch = 0 if patch.nil?
+
+puts "OS Version #{OSVER}: major=#{major} minor=#{minor} patch=#{patch}"
+
+if "#{major}.#{minor}" == "10.9" then
+  RUBY_EXE = '/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/bin/ruby'
+else
+  RUBY_EXE = '/usr/bin/ruby'
+end
+
+WKPDF_RUBY = File.dirname(__FILE__) + '/../lib/wkpdf-launch.rb'
+
+system(RUBY_EXE,WKPDF_RUBY)
