@@ -1,7 +1,5 @@
-wkpdf
-=====
 
-wkpdf is no longer maintained
+**wkpdf is no longer maintained**
 
 My objective for wkpdf was providing the user with a simple installation experience on a stock OS X installation. I was excited when Apple started shipping RubyCocoa in OS X 10.5 because this meant that wkpdf could be installed easily using the rubygems package manager, without requiring the user to modify the system ruby installation with a RubyCocoa instalation. The official adoption of RubyCocoa by Apple, motivated me to port wkpdf from its initial incarnation in Objective-C to Ruby.
 
@@ -16,6 +14,13 @@ So what's next? wkpdf was initially ported from a less advanced Objective-C impl
 
 
 
+<hr/>
+
+
+
+
+wkpdf
+=====
 
 
 Command line tool for rendering HTML to PDF using WebKit and RubyCocoa on Mac OS X
