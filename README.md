@@ -33,7 +33,7 @@ should look similar to what you get when printing the webpage with Safari.
 
 You find the latest information on how to install and use wkpdf on:
 
-  [http://plessl.github.com/wkpdf](http://plessl.github.com/wkpdf)
+  [http://plessl.github.io/wkpdf](http://plessl.github.io/wkpdf)
 
 For questions regarding wkpdf contact: wkpdf@plesslweb.ch
 
