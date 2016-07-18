@@ -132,7 +132,7 @@ class Controller : NSObject, NSApplicationDelegate, WebFrameLoadDelegate, WebRes
     let printInfoDict = sharedInfo().dictionary()
     
     printInfoDict.setObject(NSPrintSaveJob,forKey: NSPrintJobDisposition)
-    printInfoDict.setObject(NSURL(fileURLWithPath: parser.output!),forKey: NSPrintJobSavingURL)
+    printInfoDict.setObject(parser.output!,forKey: NSPrintJobSavingURL)
     
     var printInfoDict_Swift = [String: AnyObject]()
     for (k,v) in printInfoDict {
@@ -192,9 +192,13 @@ class Controller : NSObject, NSApplicationDelegate, WebFrameLoadDelegate, WebRes
     log("Create PDF with bounds \(r)\n")
     let data = viewToPrint.dataWithPDFInsideRect(r)
     log("Save PDF to file \(parser.output)\n")
-    data.writeToFile(parser.output!, atomically: true)
-    log("Terminate application\n")
-    exit(EX_OK)
+    do {
+      try data.writeToURL(parser.output!, options: NSDataWritingOptions.DataWritingAtomic)
+      exit(EX_OK)
+    } catch {
+      print("Error writing to \(parser.output): \(error)")
+      exit(EX_IOERR)
+    }
   }
   
   func checkResponseCodeforFrame(sender: WebView, frame : WebFrame) {

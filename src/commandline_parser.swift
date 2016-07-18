@@ -58,7 +58,7 @@ class CommandlineParser {
 
   private let cli = CommandLine()
   
-  var output : String?
+  var output : NSURL?
   var source : NSURL?
   var paperSize : NSSize?
   var cachingPolicy : NSURLRequestCachePolicy = NSURLRequestCachePolicy.UseProtocolCachePolicy
@@ -195,9 +195,8 @@ class CommandlineParser {
     return url!
   }
   
-  func parseOutputPath(arg: String) -> String {
-    let fsurl = NSURL(fileURLWithPath: arg)
-    return String(UTF8String: fsurl.absoluteString)!
+  func parseOutputPath(arg: String) -> NSURL {
+    return NSURL(fileURLWithPath: arg)
   }
   
 }
